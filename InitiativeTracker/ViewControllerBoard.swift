@@ -53,6 +53,10 @@ extension ViewControllerBoard: UITableViewDelegate{
         }
         return UISwipeActionsConfiguration(actions: [action])
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
 }
 
 extension ViewControllerBoard: UITableViewDataSource{
@@ -74,5 +78,13 @@ extension ViewControllerBoard: UITableViewDataSource{
         // setting entityvalues to cell
         cell.set(name: entity.name, health: entity.health, initiative: entity.initiative, isAlive: entity.isAlive)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // delete entity in entities-array and cell in tableview
+        if editingStyle == .delete{
+            entities.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
