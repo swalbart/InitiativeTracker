@@ -5,43 +5,45 @@
 //  Created by Tobias Zinke on 23.03.23.
 //
 
-import Foundation
 import UIKit
+
 
 class CustomTableViewCell: UITableViewCell{
     
-    let customLabel = UILabel()
+    // connection to cell
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelInitiative: UILabel!
+    @IBOutlet weak var labelHealth: UILabel!
+    @IBOutlet weak var buttonEdit: UIButton!
+    var isAlive: Bool!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        // Hintergrundfarbe der Zelle
-        self.backgroundColor = UIColor.yellow
-        
-        // Runde Ecken hinzufügen
-        self.layer.cornerRadius = 10
-        self.layer.masksToBounds = true
-        
-        // Custom Label hinzufügen
-        customLabel.textColor = UIColor.red
-        customLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        customLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(customLabel)
-        
-        // Constraints für das Label hinzufügen
-        NSLayoutConstraint.activate([
-            customLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            customLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            customLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            customLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-        ])
+    // setter for cell
+    func set(name: String, health: Int, initiative: Int, isAlive: Bool){
+        labelName.text = name
+        labelInitiative.text = String(initiative)
+        labelHealth.text = String(health)
+        set(isAlive: isAlive)
     }
     
-    required init?(coder: NSCoder){
-        fatalError("init(coder: ) has not been implemented")
+    // setter for isAlive
+    func set(isAlive: Bool){
+        self.isAlive = isAlive
+        isDead(isDead: !isAlive)
     }
     
-    func configure(text: String){
-        customLabel.text = text
+    // cross out text if dead
+    // TODO: replace 'false' with function that checks if entity is dead
+    private func isDead(isDead: Bool){
+        let attributedString = NSMutableAttributedString(string: labelName.text!)
+        // if dead, cross out
+        if isDead {
+            attributedString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length-1))
+        }
+        // if no longer dead (revive/etc) remove crossed out
+        else {
+            attributedString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributedString.length-1))
+        }
+        
+        labelName.attributedText = attributedString
     }
 }

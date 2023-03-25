@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B1A0229CDC4FD00CF7D04 /* Entity.swift */; };
 		D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */; };
 		D29F2B1529CB5C3200C2BEF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1429CB5C3200C2BEF5 /* SceneDelegate.swift */; };
 		D29F2B1729CB5C3200C2BEF5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1629CB5C3200C2BEF5 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D24B1A0229CDC4FD00CF7D04 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		D29F2B0F29CB5C3200C2BEF5 /* InitiativeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InitiativeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D29F2B1429CB5C3200C2BEF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				D29F2B1829CB5C3200C2BEF5 /* Main.storyboard */,
 				D29F2B2029CB5C3400C2BEF5 /* Info.plist */,
 				D29F2B4229CB60C300C2BEF5 /* ViewControllerBoard.swift */,
+				D24B1A0229CDC4FD00CF7D04 /* Entity.swift */,
 				D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */,
 				D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */,
 				D29F2B1B29CB5C3400C2BEF5 /* Assets.xcassets */,
@@ -273,6 +276,7 @@
 			files = (
 				D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */,
 				D29F2B1729CB5C3200C2BEF5 /* ViewController.swift in Sources */,
+				D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */,
 				D29F2B4529CB610600C2BEF5 /* StoryboardClass.swift in Sources */,
 				D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */,
 				D29F2B1529CB5C3200C2BEF5 /* SceneDelegate.swift in Sources */,
