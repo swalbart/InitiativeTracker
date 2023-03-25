@@ -15,12 +15,9 @@ class ViewControllerBoard: UIViewController{
         Entity(name: "NPC", health: 28, initiative: 9, isFriend: true),
     ]
     
-    @IBOutlet weak var table: UITableView!
-    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad(){
         super.viewDidLoad()
-        //table.delegate = self
-        //table.dataSource = self
     }
     
     // move to storyboard "Main"
@@ -30,7 +27,13 @@ class ViewControllerBoard: UIViewController{
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}
         windowScene.windows.first?.rootViewController = vc
     }
+    
+    // toggle editabilty
+    @IBAction func startEditing(_ sender: Any) {
+        tableView.isEditing = !tableView.isEditing
+    }
 }
+
 
 // swipe behaviour of cells
 extension ViewControllerBoard: UITableViewDelegate{
@@ -73,6 +76,9 @@ extension ViewControllerBoard: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        
+        cell.delegate = self
+        
         // selection of the next entity
         let entity = entities[indexPath.row]
         // setting entityvalues to cell
@@ -86,5 +92,16 @@ extension ViewControllerBoard: UITableViewDataSource{
             entities.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+}
+
+extension ViewControllerBoard: CustomTableViewCellDelegate{
+    func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
+        guard let indexPath = tableView.indexPath(for: cell) else{
+            return
+        }
+        let entity = entities[indexPath.row]
+        let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend)
+        entities[indexPath.row] = newEntity
     }
 }

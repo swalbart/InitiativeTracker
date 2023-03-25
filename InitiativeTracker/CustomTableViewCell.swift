@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol CustomTableViewCellDelegate: AnyObject{
+    func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool)
+}
 
 class CustomTableViewCell: UITableViewCell{
     
@@ -16,6 +19,8 @@ class CustomTableViewCell: UITableViewCell{
     @IBOutlet weak var labelHealth: UILabel!
     @IBOutlet weak var buttonEdit: UIButton!
     var isAlive: Bool!
+    
+    weak var delegate: CustomTableViewCellDelegate?
     
     // setter for cell
     func set(name: String, health: Int, initiative: Int, isAlive: Bool){
@@ -32,7 +37,6 @@ class CustomTableViewCell: UITableViewCell{
     }
     
     // cross out text if dead
-    // TODO: replace 'false' with function that checks if entity is dead
     private func isDead(isDead: Bool){
         let attributedString = NSMutableAttributedString(string: labelName.text!)
         // if dead, cross out
