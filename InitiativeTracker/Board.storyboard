@@ -106,6 +106,9 @@
                                         <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="large" weight="black"/>
                                     </state>
+                                    <connections>
+                                        <segue destination="V6B-Qb-p2J" kind="show" id="RY5-dj-bay"/>
+                                    </connections>
                                 </button>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -118,16 +121,16 @@
             </objects>
             <point key="canvasLocation" x="641.53846153846155" y="-29.14691943127962"/>
         </scene>
-        <!--View Controller Entity-->
+        <!--View Controller-->
         <scene sceneID="Kqd-gG-EBj">
             <objects>
-                <viewController id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="V6B-Qb-p2J" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="hqu-VM-ycn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNF-8U-UYz">
-                                <rect key="frame" x="20" y="131" width="351" height="34"/>
+                                <rect key="frame" x="20" y="175" width="351" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="351" id="0Ao-1p-ccN"/>
                                 </constraints>
@@ -139,9 +142,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.down.doc" catalog="system"/>
-                                <connections>
-                                    <action selector="save:" destination="V6B-Qb-p2J" eventType="touchUpInside" id="dto-ew-OuB"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KM7-Re-1Qi"/>
@@ -154,10 +154,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bxo-iT-3UG"/>
-                    <connections>
-                        <outlet property="save" destination="2O7-23-fGl" id="cyJ-sw-FVo"/>
-                        <outlet property="textfield" destination="gNF-8U-UYz" id="8am-r0-48Y"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzS-Wr-B4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
