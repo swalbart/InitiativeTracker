@@ -14,7 +14,7 @@ class ViewControllerBoard: UIViewController{
         Entity(name: "Hero", health: 35, initiative: 16, isFriend: true),
         Entity(name: "NPC", health: 28, initiative: 9, isFriend: true),
     ]
-    
+
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -32,11 +32,14 @@ class ViewControllerBoard: UIViewController{
     @IBAction func startEditing(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
     }
+    
 }
 
 
-// swipe behaviour of cells
+
+// Delegate
 extension ViewControllerBoard: UITableViewDelegate{
+    // swipe right behaviour of cells
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         // swipe message and actions
@@ -57,11 +60,15 @@ extension ViewControllerBoard: UITableViewDelegate{
         return UISwipeActionsConfiguration(actions: [action])
     }
     
+    // swipe left behaviour of cells
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
 }
 
+
+
+//DataSource
 extension ViewControllerBoard: UITableViewDataSource{
     
     // amount of sections in tableview
@@ -74,11 +81,10 @@ extension ViewControllerBoard: UITableViewDataSource{
         return entities.count
     }
     
+    // apply entity values to display in cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        
         cell.delegate = self
-        
         // selection of the next entity
         let entity = entities[indexPath.row]
         // setting entityvalues to cell
@@ -86,14 +92,25 @@ extension ViewControllerBoard: UITableViewDataSource{
         return cell
     }
     
+    // delete entity in entities-array and cell in tableview
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        // delete entity in entities-array and cell in tableview
         if editingStyle == .delete{
             entities.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    
+    // reodering cells
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // remove cell from current spot
+        let entity = entities.remove(at: sourceIndexPath.row)
+        // insert cell in new spot
+        entities.insert(entity, at: destinationIndexPath.row)
+    }
 }
+
+
+
 
 extension ViewControllerBoard: CustomTableViewCellDelegate{
     func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {

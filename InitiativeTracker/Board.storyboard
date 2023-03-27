@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlW-ns-mAY">
-                                                    <rect key="frame" x="48" y="4" width="237" height="36"/>
+                                                    <rect key="frame" x="48" y="4" width="294" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -43,17 +43,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-b7-zxK">
-                                                    <rect key="frame" x="350" y="4" width="36" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" image="square.and.pencil" catalog="system">
-                                                        <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                        <color key="baseBackgroundColor" systemColor="secondaryLabelColor"/>
-                                                    </buttonConfiguration>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMG-ha-PZJ">
-                                                    <rect key="frame" x="309" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="350" y="4" width="36" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemRedColor"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
@@ -63,7 +54,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="buttonEdit" destination="ab4-b7-zxK" id="RWJ-KR-U9I"/>
                                             <outlet property="labelHealth" destination="FMG-ha-PZJ" id="F7N-09-Sex"/>
                                             <outlet property="labelInitiative" destination="BBL-2u-f8v" id="C8D-AE-ubH"/>
                                             <outlet property="labelName" destination="qlW-ns-mAY" id="eFh-rC-hLM"/>
@@ -128,6 +118,51 @@
             </objects>
             <point key="canvasLocation" x="641.53846153846155" y="-29.14691943127962"/>
         </scene>
+        <!--View Controller Entity-->
+        <scene sceneID="Kqd-gG-EBj">
+            <objects>
+                <viewController id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="hqu-VM-ycn">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNF-8U-UYz">
+                                <rect key="frame" x="20" y="131" width="351" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="351" id="0Ao-1p-ccN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O7-23-fGl">
+                                <rect key="frame" x="336" y="47" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.down.doc" catalog="system"/>
+                                <connections>
+                                    <action selector="save:" destination="V6B-Qb-p2J" eventType="touchUpInside" id="dto-ew-OuB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KM7-Re-1Qi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gNF-8U-UYz" firstAttribute="leading" secondItem="KM7-Re-1Qi" secondAttribute="leading" constant="20" id="Bl7-Rl-BRx"/>
+                            <constraint firstItem="gNF-8U-UYz" firstAttribute="top" secondItem="KM7-Re-1Qi" secondAttribute="top" constant="84" id="lDL-pv-6d7"/>
+                            <constraint firstItem="KM7-Re-1Qi" firstAttribute="bottom" secondItem="gNF-8U-UYz" secondAttribute="bottom" constant="700" id="lIX-SF-0Uv"/>
+                            <constraint firstItem="KM7-Re-1Qi" firstAttribute="trailing" secondItem="gNF-8U-UYz" secondAttribute="trailing" constant="20" id="qBG-Mm-ndw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bxo-iT-3UG"/>
+                    <connections>
+                        <outlet property="save" destination="2O7-23-fGl" id="cyJ-sw-FVo"/>
+                        <outlet property="textfield" destination="gNF-8U-UYz" id="8am-r0-48Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PzS-Wr-B4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1464.6153846153845" y="-29.14691943127962"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="kKr-Qo-q5s">
             <objects>
@@ -146,13 +181,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
