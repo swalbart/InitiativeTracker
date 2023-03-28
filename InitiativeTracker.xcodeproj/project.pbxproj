@@ -21,6 +21,7 @@
 		D29F2B4529CB610600C2BEF5 /* StoryboardClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B4429CB610600C2BEF5 /* StoryboardClass.swift */; };
 		D29F2B4729CB6E3E00C2BEF5 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */; };
 		D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */; };
+		D2CABB4B29D31CE700743373 /* ViewControllerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D29F2B4429CB610600C2BEF5 /* StoryboardClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardClass.swift; sourceTree = "<group>"; };
 		D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
 		D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				D29F2B4229CB60C300C2BEF5 /* ViewControllerBoard.swift */,
 				D24B1A0229CDC4FD00CF7D04 /* Entity.swift */,
 				D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */,
+				D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */,
 				D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */,
 				D29F2B1B29CB5C3400C2BEF5 /* Assets.xcassets */,
 				D29F2B1D29CB5C3400C2BEF5 /* LaunchScreen.storyboard */,
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */,
+				D2CABB4B29D31CE700743373 /* ViewControllerEntity.swift in Sources */,
 				D29F2B1729CB5C3200C2BEF5 /* ViewController.swift in Sources */,
 				D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */,
 				D29F2B4529CB610600C2BEF5 /* StoryboardClass.swift in Sources */,

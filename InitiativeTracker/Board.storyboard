@@ -57,6 +57,7 @@
                                             <outlet property="labelHealth" destination="FMG-ha-PZJ" id="F7N-09-Sex"/>
                                             <outlet property="labelInitiative" destination="BBL-2u-f8v" id="C8D-AE-ubH"/>
                                             <outlet property="labelName" destination="qlW-ns-mAY" id="eFh-rC-hLM"/>
+                                            <segue destination="V6B-Qb-p2J" kind="show" destinationCreationSelector="toViewControllerEntity:" id="5du-ob-PwA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -121,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="641.53846153846155" y="-29.14691943127962"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller Entity-->
         <scene sceneID="Kqd-gG-EBj">
             <objects>
-                <viewController id="V6B-Qb-p2J" sceneMemberID="viewController">
+                <viewController id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="hqu-VM-ycn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,12 +138,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O7-23-fGl">
-                                <rect key="frame" x="336" y="47" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.down.doc" catalog="system"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KM7-Re-1Qi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -153,7 +148,22 @@
                             <constraint firstItem="KM7-Re-1Qi" firstAttribute="trailing" secondItem="gNF-8U-UYz" secondAttribute="trailing" constant="20" id="qBG-Mm-ndw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bxo-iT-3UG"/>
+                    <navigationItem key="navigationItem" id="bxo-iT-3UG">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="KvD-gs-e3F">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2O7-23-fGl">
+                                <rect key="frame" x="326.66666666666669" y="4.6666666666666679" width="47.333333333333314" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.down.doc" catalog="system"/>
+                                <connections>
+                                    <action selector="save:" destination="V6B-Qb-p2J" eventType="touchUpInside" id="KP0-QL-B5j"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textfield" destination="gNF-8U-UYz" id="k5e-er-DHR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzS-Wr-B4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -176,6 +186,9 @@
             <point key="canvasLocation" x="-222" y="-29"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5du-ob-PwA"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>

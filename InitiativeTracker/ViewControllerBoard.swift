@@ -33,6 +33,17 @@ class ViewControllerBoard: UIViewController{
         tableView.isEditing = !tableView.isEditing
     }
     
+    // send entitydata to ViewControllerEntity
+    @IBSegueAction func toViewControllerEntity(_ coder: NSCoder) -> ViewControllerEntity? {
+        let vc = ViewControllerEntity(coder: coder)
+        
+        if let indexpath = tableView.indexPathForSelectedRow{
+            let entity = entities[indexpath.row]
+            vc?.entity = entity
+        }
+        return vc
+    }
+    
 }
 
 
