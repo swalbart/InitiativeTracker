@@ -44,7 +44,7 @@ class ViewControllerBoard: UIViewController{
         }
         // create new entity button tapped
         else{
-            vc?.entity = Entity(name: "New entity", health: 1, initiative: 1, isFriend: true)
+            vc?.entity = Entity(name: "", health: 0, initiative: 0, isFriend: true)
         }
         vc?.delegate = self
         return vc
