@@ -130,23 +130,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNF-8U-UYz">
-                                <rect key="frame" x="37" y="175" width="299" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="351" id="0Ao-1p-ccN"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ms6-Ec-iEi">
+                                <rect key="frame" x="44" y="134" width="287" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KM7-Re-1Qi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="gNF-8U-UYz" firstAttribute="leading" secondItem="KM7-Re-1Qi" secondAttribute="leading" constant="20" id="Bl7-Rl-BRx"/>
-                            <constraint firstItem="gNF-8U-UYz" firstAttribute="top" secondItem="KM7-Re-1Qi" secondAttribute="top" constant="84" id="lDL-pv-6d7"/>
-                            <constraint firstItem="KM7-Re-1Qi" firstAttribute="bottom" secondItem="gNF-8U-UYz" secondAttribute="bottom" constant="700" id="lIX-SF-0Uv"/>
-                            <constraint firstItem="KM7-Re-1Qi" firstAttribute="trailing" secondItem="gNF-8U-UYz" secondAttribute="trailing" constant="20" id="qBG-Mm-ndw"/>
-                        </constraints>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="bxo-iT-3UG">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KvD-gs-e3F">
@@ -162,7 +154,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="textfield" destination="gNF-8U-UYz" id="k5e-er-DHR"/>
+                        <outlet property="textfield" destination="ms6-Ec-iEi" id="Hzg-iI-usI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PzS-Wr-B4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -193,8 +185,8 @@
         <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

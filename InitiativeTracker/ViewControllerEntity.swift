@@ -30,4 +30,5 @@ class ViewControllerEntity: UIViewController{
         let entity = Entity(name: textfield.text!, health: entity!.health, initiative: entity!.initiative, isFriend: entity!.isFriend)
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
     }
+    
 }
