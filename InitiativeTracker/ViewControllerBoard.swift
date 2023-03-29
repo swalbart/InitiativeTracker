@@ -37,10 +37,16 @@ class ViewControllerBoard: UIViewController{
     @IBSegueAction func toViewControllerEntity(_ coder: NSCoder) -> ViewControllerEntity? {
         let vc = ViewControllerEntity(coder: coder)
         
+        // cell tapped to edit
         if let indexpath = tableView.indexPathForSelectedRow{
             let entity = entities[indexpath.row]
             vc?.entity = entity
         }
+        // create new entity button tapped
+        else{
+            vc?.entity = Entity(name: "New entity", health: 1, initiative: 1, isFriend: true)
+        }
+        vc?.delegate = self
         return vc
     }
     
@@ -122,7 +128,6 @@ extension ViewControllerBoard: UITableViewDataSource{
 
 
 
-
 extension ViewControllerBoard: CustomTableViewCellDelegate{
     func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
         guard let indexPath = tableView.indexPath(for: cell) else{
@@ -132,4 +137,26 @@ extension ViewControllerBoard: CustomTableViewCellDelegate{
         let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend)
         entities[indexPath.row] = newEntity
     }
+}
+
+
+
+extension ViewControllerBoard: ViewControllerEntityDelegate{
+    func viewControllerEntity(_ vc: ViewControllerEntity, didSaveEntity entity: Entity) {
+        if let indexPath = tableView.indexPathForSelectedRow{
+            //update
+            entities[indexPath.row] = entity
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        else{
+            //create
+            entities.append(entity)
+            tableView.insertRows(at: [IndexPath(row: entities.count-1, section: 0)], with: .automatic)
+        }
+        // dismisses the poped up view (not in use: view is fullscreen)
+        // print("to done")
+        // dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

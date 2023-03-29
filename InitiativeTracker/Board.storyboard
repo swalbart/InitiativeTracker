@@ -108,7 +108,7 @@
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="large" weight="black"/>
                                     </state>
                                     <connections>
-                                        <segue destination="V6B-Qb-p2J" kind="show" id="RY5-dj-bay"/>
+                                        <segue destination="V6B-Qb-p2J" kind="show" destinationCreationSelector="toViewControllerEntity:" id="RY5-dj-bay"/>
                                     </connections>
                                 </button>
                             </barButtonItem>
@@ -126,12 +126,12 @@
         <scene sceneID="Kqd-gG-EBj">
             <objects>
                 <viewController id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="hqu-VM-ycn">
+                    <view key="view" contentMode="scaleToFill" id="hqu-VM-ycn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNF-8U-UYz">
-                                <rect key="frame" x="20" y="175" width="351" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNF-8U-UYz">
+                                <rect key="frame" x="37" y="175" width="299" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="351" id="0Ao-1p-ccN"/>
                                 </constraints>
@@ -150,7 +150,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bxo-iT-3UG">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="KvD-gs-e3F">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2O7-23-fGl">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2O7-23-fGl">
                                 <rect key="frame" x="326.66666666666669" y="4.6666666666666679" width="47.333333333333314" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
