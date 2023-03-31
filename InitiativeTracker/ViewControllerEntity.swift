@@ -13,6 +13,14 @@ protocol ViewControllerEntityDelegate: AnyObject{
 
 class ViewControllerEntity: UIViewController{
     
+    @IBOutlet weak var deadText: UITextField!
+    @IBOutlet weak var aliveText: UITextField!
+    @IBOutlet weak var enemyText: UITextField!
+    @IBOutlet weak var friendText: UITextField!
+    @IBOutlet weak var initiativeText: UITextField!
+    @IBOutlet weak var healthText: UITextField!
+    @IBOutlet weak var titleText: UITextField!
+    @IBOutlet weak var notesText: UITextField!
     @IBOutlet weak var isAliveSwitch: UISwitch!
     @IBOutlet weak var isFriendSwitch: UISwitch!
     @IBOutlet weak var initiativeNumber: UITextField!
@@ -30,6 +38,14 @@ class ViewControllerEntity: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deadText.isUserInteractionEnabled = false
+        aliveText.isUserInteractionEnabled = false
+        enemyText.isUserInteractionEnabled = false
+        friendText.isUserInteractionEnabled = false
+        initiativeText.isUserInteractionEnabled = false
+        healthText.isUserInteractionEnabled = false
+        titleText.isUserInteractionEnabled = false
+        notesText.isUserInteractionEnabled = false
         // get values from entity
         if let initiative = entity?.initiative{
             initiativeNumber.text = String(initiative)
@@ -53,6 +69,7 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
+        
     // save edited/changed name in entity
     @IBAction func save(_ sender: Any) {
         print("saving entity changes") // optional output
@@ -67,6 +84,18 @@ class ViewControllerEntity: UIViewController{
         }
         let entity = Entity(name: textfield.text!, health: healthInt, initiative: initiativeInt, isFriend: isEntityFriend!, isAlive: isEntityAlive!)
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
+        
+        // configure the transition
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        // navigate to the ViewControllerBoard
+        if let vcBoard = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "ViewControllerBoard") as? ViewControllerBoard {
+            //navigationController?.view.layer.add(transition, forKey: kCATransition)
+            navigationController?.pushViewController(vcBoard, animated: true)
+        }
+        //TODO: Durch das welcheln auf ViewControllerBoard werden leider alle Werte wieder neu initialisiert
     }
     
     // switch for dead/alive
