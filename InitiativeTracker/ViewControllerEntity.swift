@@ -69,6 +69,7 @@ class ViewControllerEntity: UIViewController{
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
     }
     
+    // switch for dead/alive
     @IBAction func isAliveToggle(_ sender: UISwitch) {
         if sender.isOn{
             isEntityAlive = true
@@ -77,6 +78,7 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
+    // switch for enemy/friend
     @IBAction func isFriendToggle(_ sender: UISwitch) {
         if sender.isOn{
             isEntityFriend = true
@@ -85,6 +87,7 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
+    // button: decrements initiative
     @IBAction func subtractInitiative(_ sender: Any) {
         var initiativeString = initiativeNumber.text!
         var initiativeInteger = Int(initiativeString)
@@ -97,6 +100,7 @@ class ViewControllerEntity: UIViewController{
         initiativeNumber.text = initiativeString
     }
     
+    // button: increments initiative
     @IBAction func addInitiative(_ sender: Any) {
         var initiativeString = initiativeNumber.text!
         var initiativeInteger = Int(initiativeString)
@@ -109,6 +113,7 @@ class ViewControllerEntity: UIViewController{
         initiativeNumber.text = initiativeString
     }
     
+    // button: decrements health
     @IBAction func subtractHealth(_ sender: Any) {
         var healthString = healthNumber.text!
         var healthInteger = Int(healthString)
@@ -121,6 +126,7 @@ class ViewControllerEntity: UIViewController{
         healthNumber.text = healthString
     }
     
+    // button: increments health
     @IBAction func addHealth(_ sender: Any) {
         var healthString = healthNumber.text!
         var healthInteger = Int(healthString)

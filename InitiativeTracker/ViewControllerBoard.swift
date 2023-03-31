@@ -12,7 +12,8 @@ class ViewControllerBoard: UIViewController{
     var entities = [
         Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false, isAlive: true),
         Entity(name: "Hero", health: 35, initiative: 16, isFriend: true, isAlive: true),
-        Entity(name: "NPC", health: 28, initiative: 9, isFriend: true, isAlive: true),
+        Entity(name: "NPC", health: 28, initiative: 5, isFriend: true, isAlive: true),
+        Entity(name: "Al", health: 0, initiative: 8, isFriend: false, isAlive: false),
     ]
 
     @IBOutlet weak var tableView: UITableView!
