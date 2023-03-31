@@ -23,11 +23,14 @@ class ViewControllerEntity: UIViewController{
     @IBOutlet weak var healthAddButton: UIButton!
     @IBOutlet weak var textfield: UITextField!
     var entity: Entity?
+    var isEntityAlive: Bool?
+    var isEntityFriend: Bool?
     
     weak var delegate: ViewControllerEntityDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // get values from entity
         if let initiative = entity?.initiative{
             initiativeNumber.text = String(initiative)
         } else {
@@ -38,7 +41,16 @@ class ViewControllerEntity: UIViewController{
         }else {
             healthNumber.text = "0"
         }
-            textfield.text = entity?.name
+        textfield.text = entity?.name
+        //TODO: Switch status laden
+        isEntityAlive = entity?.isAlive
+        isEntityFriend = entity?.isFriend
+        if !isEntityAlive!{
+            isAliveSwitch.setOn(false, animated: false)
+        }
+        if !isEntityFriend!{
+            isFriendSwitch.setOn(false, animated: false)
+        }
     }
     
     // save edited/changed name in entity
@@ -53,8 +65,24 @@ class ViewControllerEntity: UIViewController{
             //TODO: Exceptionhandling
             return
         }
-        let entity = Entity(name: textfield.text!, health: healthInt, initiative: initiativeInt, isFriend: entity!.isFriend)
+        let entity = Entity(name: textfield.text!, health: healthInt, initiative: initiativeInt, isFriend: isEntityFriend!, isAlive: isEntityAlive!)
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
+    }
+    
+    @IBAction func isAliveToggle(_ sender: UISwitch) {
+        if sender.isOn{
+            isEntityAlive = true
+        } else {
+            isEntityAlive = false
+        }
+    }
+    
+    @IBAction func isFriendToggle(_ sender: UISwitch) {
+        if sender.isOn{
+            isEntityFriend = true
+        } else {
+            isEntityFriend = false
+        }
     }
     
     @IBAction func subtractInitiative(_ sender: Any) {

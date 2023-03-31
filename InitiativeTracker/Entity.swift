@@ -15,7 +15,7 @@ struct Entity {
     let isAlive: Bool
     
     // c-tor
-    init(name: String, health: Int, initiative: Int, isFriend: Bool, isAlive: Bool = true){
+    init(name: String, health: Int, initiative: Int, isFriend: Bool, isAlive: Bool){
         self.name = name
         self.health = health
         self.initiative = initiative

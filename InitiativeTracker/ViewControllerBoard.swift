@@ -10,9 +10,9 @@ import UIKit
 class ViewControllerBoard: UIViewController{
     
     var entities = [
-        Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false),
-        Entity(name: "Hero", health: 35, initiative: 16, isFriend: true),
-        Entity(name: "NPC", health: 28, initiative: 9, isFriend: true),
+        Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false, isAlive: true),
+        Entity(name: "Hero", health: 35, initiative: 16, isFriend: true, isAlive: true),
+        Entity(name: "NPC", health: 28, initiative: 9, isFriend: true, isAlive: true),
     ]
 
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +44,7 @@ class ViewControllerBoard: UIViewController{
         }
         // create new entity button tapped
         else{
-            vc?.entity = Entity(name: "", health: 0, initiative: 0, isFriend: true)
+            vc?.entity = Entity(name: "New Entity", health: 0, initiative: 0, isFriend: true, isAlive: true)
         }
         vc?.delegate = self
         return vc
@@ -127,29 +127,31 @@ extension ViewControllerBoard: UITableViewDataSource{
 }
 
 
-
+// keep data persistant in array
 extension ViewControllerBoard: CustomTableViewCellDelegate{
     func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
         guard let indexPath = tableView.indexPath(for: cell) else{
             return
         }
+        // it is not possible to mutate 'entity' because it is a constand
+        // instead a new entity gets created to replace the old
         let entity = entities[indexPath.row]
-        let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend)
+        let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
         entities[indexPath.row] = newEntity
     }
 }
 
 
-
+// save created or edited entity
 extension ViewControllerBoard: ViewControllerEntityDelegate{
     func viewControllerEntity(_ vc: ViewControllerEntity, didSaveEntity entity: Entity) {
         if let indexPath = tableView.indexPathForSelectedRow{
-            //update
+            // edited entity
             entities[indexPath.row] = entity
             tableView.reloadRows(at: [indexPath], with: .none)
         }
         else{
-            //create
+            // created entity
             entities.append(entity)
             tableView.insertRows(at: [IndexPath(row: entities.count-1, section: 0)], with: .automatic)
         }
