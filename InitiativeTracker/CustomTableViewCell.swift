@@ -13,11 +13,12 @@ protocol CustomTableViewCellDelegate: AnyObject{
 
 class CustomTableViewCell: UITableViewCell{
     
-    // connection to cell
+    // contents of cell (list of entity-cells)
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelInitiative: UILabel!
     @IBOutlet weak var labelHealth: UILabel!
     @IBOutlet weak var buttonEdit: UIButton!
+    // other
     var isAlive: Bool!
     
     weak var delegate: CustomTableViewCellDelegate?
