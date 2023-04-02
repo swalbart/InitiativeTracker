@@ -58,7 +58,6 @@ class ViewControllerEntity: UIViewController{
             healthNumber.text = "0"
         }
         textfield.text = entity?.name
-        //TODO: Switch status laden
         isEntityAlive = entity?.isAlive
         isEntityFriend = entity?.isFriend
         if !isEntityAlive!{
@@ -91,10 +90,11 @@ class ViewControllerEntity: UIViewController{
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromLeft
         // navigate to the ViewControllerBoard
+        /*
         if let vcBoard = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "ViewControllerBoard") as? ViewControllerBoard {
             //navigationController?.view.layer.add(transition, forKey: kCATransition)
             navigationController?.pushViewController(vcBoard, animated: true)
-        }
+        }*/
         //TODO: Durch das welcheln auf ViewControllerBoard werden leider alle Werte wieder neu initialisiert
     }
     

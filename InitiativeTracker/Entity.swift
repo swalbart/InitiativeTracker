@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Entity {
+struct Entity: Codable {
     let name: String
     let health: Int
     let initiative: Int

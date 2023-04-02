@@ -16,9 +16,17 @@ class ViewControllerBoard: UIViewController{
         Entity(name: "Al", health: 0, initiative: 8, isFriend: false, isAlive: false),
     ]
 
+    
+    @IBOutlet weak var currentInitiative: UILabel!
+    @IBOutlet weak var currentName: UILabel!
+    @IBOutlet weak var currentHealth: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    var keepUpdated = true
     override func viewDidLoad(){
         super.viewDidLoad()
+        if keepUpdated {
+            //TODO: get values from entity with highest ini
+        }
     }
     
     // move to storyboard "Main"
