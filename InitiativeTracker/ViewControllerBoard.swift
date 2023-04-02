@@ -166,7 +166,10 @@ extension ViewControllerBoard: UITableViewDelegate{
             // reset swipe animation
             complete(true)
             print("toggeled 'isAlive'-value of entity")
-            self.nextEntity()
+            let entityIsAlive = self.entityData.groupA[self.currentPosition].isAlive
+            if !entityIsAlive {
+                self.nextEntity()
+            }
             self.entityData.save()
         }
         return UISwipeActionsConfiguration(actions: [action])
