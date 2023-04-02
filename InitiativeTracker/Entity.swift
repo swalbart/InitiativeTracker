@@ -13,8 +13,7 @@ struct Entity: Codable {
     let initiative: Int
     let isFriend: Bool
     let isAlive: Bool
-    //TODO: implement a 'notes' variable
-    
+
     // c-tor
     init(name: String, health: Int, initiative: Int, isFriend: Bool, isAlive: Bool){
         self.name = name

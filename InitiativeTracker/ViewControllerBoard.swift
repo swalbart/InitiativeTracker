@@ -12,17 +12,8 @@ class ViewControllerBoard: UIViewController{
     // enables use of shared EntityData
     let entityData = EntityData.shared
     
-    // global variable to track 
+    // global variable to track diyplayed entity
     var currentPosition = 0
-    
-    /*
-    var entities = [
-        Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false, isAlive: true),
-        Entity(name: "Hero", health: 35, initiative: 16, isFriend: true, isAlive: true),
-        Entity(name: "NPC", health: 28, initiative: 5, isFriend: true, isAlive: true),
-        Entity(name: "Al", health: 0, initiative: 8, isFriend: false, isAlive: false),
-    ]*/
-
     
     @IBOutlet weak var currentInitiative: UILabel!
     @IBOutlet weak var currentName: UILabel!
@@ -34,6 +25,7 @@ class ViewControllerBoard: UIViewController{
         sortEntitys()
     }
     
+    // MARK: Storyboard connection
     // move to storyboard "Main"
     @IBAction func buttonToMain(_ sender: UIButton){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -42,9 +34,10 @@ class ViewControllerBoard: UIViewController{
         windowScene.windows.first?.rootViewController = vc
     }
     
-    // toggle editabilty
-    @IBAction func startEditing(_ sender: Any) {
-        tableView.isEditing = !tableView.isEditing
+    // MARK: Navigationbar
+    @IBAction func sortEntityListButton(_ sender: Any) {
+        sortEntitys()
+        //TODO: auch die tableview akutalisieren
     }
     
     // send entity data to ViewControllerEntity
@@ -64,6 +57,25 @@ class ViewControllerBoard: UIViewController{
         return vc
     }
     
+    // toggle editabilty
+    @IBAction func startEditing(_ sender: Any) {
+        tableView.isEditing = !tableView.isEditing
+    }
+    
+    // MARK: Display: current entity
+    // place entity at pos n in show box below table
+    func setShowboxEntity(pos: Int) {
+        guard pos >= currentPosition && pos < entityData.groupA.count else{
+            return // index out of range
+        }
+        
+        let entity = entityData.groupA[pos]
+        currentInitiative.text = String(entity.initiative)
+        currentHealth.text = String(entity.health)
+        currentName.text = entity.name
+    }
+    
+    // MARK: Sorting
     // sorting all entites (most initiative top)
     func sortEntitys() {
         entityData.groupA.sort {
@@ -80,53 +92,52 @@ class ViewControllerBoard: UIViewController{
         }
     }
     
-    /* Ersetzt von setShowboxEntity
-    // place the entity with the highest initiative in show box below table
-    func setHighestInitiativeEntity() {
-        // converting Integers to stings
-        if let firstInitiative = entityData.groupA.first?.initiative{
-            currentInitiative.text = String(firstInitiative)
-        } else {
-            currentInitiative.text = "Err"
-        }
-        if let firstHealth = entityData.groupA.first?.health{
-            currentHealth.text = String(firstHealth)
-        } else {
-            currentHealth.text = "Err"
-        }
-        currentName.text = entityData.groupA.first?.name
-    }*/
-    
-    // place entity at pos n in show box below table
-    func setShowboxEntity(pos: Int) {
-        guard pos >= currentPosition && pos < entityData.groupA.count else{
-            return // index out of range
-        }
-        
-        let entity = entityData.groupA[pos]
-        currentInitiative.text = String(entity.initiative)
-        currentHealth.text = String(entity.health)
-        currentName.text = entity.name
-    }
-    
+    // MARK: Traversing indexes
     func previousEntity(){
-        if currentPosition > 0 {
-            currentPosition -= 1
-        } else {
-            currentPosition = entityData.groupA.count-1
+        var count = entityData.groupA.count
+        // search for next alive member
+        while count >= 0 {
+            // traverse through all indexes
+            if currentPosition > 0 {
+                currentPosition -= 1
+            } else {
+                currentPosition = entityData.groupA.count-1
+            }
+            // check if isAlive
+            if entityData.groupA[currentPosition].isAlive {
+                count = 0 // break the loop
+                setShowboxEntity(pos: currentPosition)
+            }
+            count -= 1
         }
-        setShowboxEntity(pos: currentPosition)
+        if count == 0 {
+            print("Error.priviousEntity(): there is no alive entity left but there should be.")
+        }
     }
     
     func nextEntity(){
-        if currentPosition < entityData.groupA.count-1 {
-            currentPosition += 1
-        } else {
-            currentPosition = 0
+        var count = entityData.groupA.count
+        // search for next alive member
+        while count >= 0 {
+            // traverse through all indexes
+            if currentPosition < entityData.groupA.count-1 {
+                currentPosition += 1
+            } else {
+                currentPosition = 0
+            }
+            // check if isAlive
+            if entityData.groupA[currentPosition].isAlive {
+                count = 0 // break the loop
+                setShowboxEntity(pos: currentPosition)
+            }
+            count -= 1
         }
-        setShowboxEntity(pos: currentPosition)
+        if count == 0 {
+            print("Error.nextEntity(): there is no alive entity left but there should be.")
+        }
     }
     
+    // MARK: Player button actions
     @IBAction func previousButton(_ sender: Any) {
         previousEntity()
     }
@@ -145,8 +156,7 @@ class ViewControllerBoard: UIViewController{
     
 }
 
-
-
+// MARK: Delegate
 // Delegate
 extension ViewControllerBoard: UITableViewDelegate{
     // swipe right behaviour of cells
@@ -181,8 +191,7 @@ extension ViewControllerBoard: UITableViewDelegate{
     }
 }
 
-
-
+// MARK: DataSource
 //DataSource
 extension ViewControllerBoard: UITableViewDataSource{
     
@@ -229,23 +238,7 @@ extension ViewControllerBoard: UITableViewDataSource{
     }
 }
 
-
-// keep data persistant in array
-extension ViewControllerBoard: CustomTableViewCellDelegate{
-    func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
-        guard let indexPath = tableView.indexPath(for: cell) else{
-            return
-        }
-        // it is not possible to mutate 'entity' because it is a constand
-        // instead a new entity gets created to replace the old
-        let entity = entityData.groupA[indexPath.row]
-        let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
-        entityData.groupA[indexPath.row] = newEntity
-        entityData.save()
-    }
-}
-
-
+// MARK: Saving changes
 // save created or edited entity
 extension ViewControllerBoard: ViewControllerEntityDelegate{
     func viewControllerEntity(_ vc: ViewControllerEntity, didSaveEntity entity: Entity) {
@@ -263,9 +256,22 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
         }
         sortEntitys()
         // dismisses the poped up view (not in use: view is fullscreen)
-        // print("to done")
         // dismiss(animated: true, completion: nil)
     }
-    
-    
+}
+
+// MARK: Storing data persistent
+// keep data persistent in array
+extension ViewControllerBoard: CustomTableViewCellDelegate{
+    func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
+        guard let indexPath = tableView.indexPath(for: cell) else{
+            return
+        }
+        // it is not possible to mutate 'entity' because it is a constand
+        // instead a new entity gets created to replace the old
+        let entity = entityData.groupA[indexPath.row]
+        let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
+        entityData.groupA[indexPath.row] = newEntity
+        entityData.save()
+    }
 }

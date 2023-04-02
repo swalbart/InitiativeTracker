@@ -11,8 +11,8 @@ class EntityData: Codable {
     static let shared = EntityData()
 
     var groupA: [Entity] = []
-    //var groupB: [Entity] = []
-
+    
+    // MARK: Save data
     // serializes EntityData with JSONencoder and saved
     func save() {
         do {
@@ -24,6 +24,7 @@ class EntityData: Codable {
         }
     }
 
+    // MARK: Load data
     // loads EntityData and deserializes it with JSONdecoder
     func load() {
         do {
@@ -37,7 +38,7 @@ class EntityData: Codable {
         }
     }
 
-    // path for data
+    // MARK: Path for data
     private func fileURL() -> URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsDirectory.appendingPathComponent("entityData.json")

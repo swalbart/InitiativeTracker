@@ -68,7 +68,7 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
-        
+    // MARK: Save changes in Entity
     // save edited/changed name in entity
     @IBAction func save(_ sender: Any) {
         print("saving entity changes") // optional output
@@ -89,15 +89,9 @@ class ViewControllerEntity: UIViewController{
         transition.duration = 0.3
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromLeft
-        // navigate to the ViewControllerBoard
-        /*
-        if let vcBoard = UIStoryboard(name: "Board", bundle: nil).instantiateViewController(withIdentifier: "ViewControllerBoard") as? ViewControllerBoard {
-            //navigationController?.view.layer.add(transition, forKey: kCATransition)
-            navigationController?.pushViewController(vcBoard, animated: true)
-        }*/
-        //TODO: Durch das welcheln auf ViewControllerBoard werden leider alle Werte wieder neu initialisiert
     }
     
+    // MARK: User options
     // switch for dead/alive
     @IBAction func isAliveToggle(_ sender: UISwitch) {
         if sender.isOn{
