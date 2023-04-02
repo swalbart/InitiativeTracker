@@ -12,6 +12,9 @@ class ViewControllerBoard: UIViewController{
     // enables use of shared EntityData
     let entityData = EntityData.shared
     
+    // global variable to track 
+    var currentPosition = 0
+    
     /*
     var entities = [
         Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false, isAlive: true),
@@ -68,7 +71,8 @@ class ViewControllerBoard: UIViewController{
         }
         entityData.save()
         if entityData.groupA.count > 0 {
-            setShowboxEntity(pos: 0)
+            currentPosition = 0
+            setShowboxEntity(pos: currentPosition)
         } else {
             currentInitiative.text = "-"
             currentHealth.text = "-"
@@ -95,7 +99,7 @@ class ViewControllerBoard: UIViewController{
     
     // place entity at pos n in show box below table
     func setShowboxEntity(pos: Int) {
-        guard pos >= 0 && pos < entityData.groupA.count else{
+        guard pos >= currentPosition && pos < entityData.groupA.count else{
             return // index out of range
         }
         
@@ -105,7 +109,39 @@ class ViewControllerBoard: UIViewController{
         currentName.text = entity.name
     }
     
+    func previousEntity(){
+        if currentPosition > 0 {
+            currentPosition -= 1
+        } else {
+            currentPosition = entityData.groupA.count-1
+        }
+        setShowboxEntity(pos: currentPosition)
+    }
     
+    func nextEntity(){
+        if currentPosition < entityData.groupA.count-1 {
+            currentPosition += 1
+        } else {
+            currentPosition = 0
+        }
+        setShowboxEntity(pos: currentPosition)
+    }
+    
+    @IBAction func previousButton(_ sender: Any) {
+        previousEntity()
+    }
+    
+    @IBAction func nextButton(_ sender: Any) {
+        nextEntity()
+    }
+    
+    @IBAction func attackButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func healButton(_ sender: Any) {
+        
+    }
     
 }
 
@@ -130,6 +166,7 @@ extension ViewControllerBoard: UITableViewDelegate{
             // reset swipe animation
             complete(true)
             print("toggeled 'isAlive'-value of entity")
+            self.nextEntity()
             self.entityData.save()
         }
         return UISwipeActionsConfiguration(actions: [action])

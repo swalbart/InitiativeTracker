@@ -11,7 +11,7 @@ class EntityData: Codable {
     static let shared = EntityData()
 
     var groupA: [Entity] = []
-    var groupB: [Entity] = []
+    //var groupB: [Entity] = []
 
     // serializes EntityData with JSONencoder and saved
     func save() {
@@ -31,7 +31,7 @@ class EntityData: Codable {
             let decoder = JSONDecoder()
             let loadedData = try decoder.decode(EntityData.self, from: data)
             self.groupA = loadedData.groupA
-            self.groupB = loadedData.groupB
+            //self.groupB = loadedData.groupB
         } catch {
             print("Error loading entity data: (error.localizedDescription)")
         }

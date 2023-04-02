@@ -115,24 +115,36 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="arrowshape.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="previousButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5mY-Uu-BNh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCC-AJ-cij">
                                         <rect key="frame" x="302" y="52" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="arrowshape.right.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="nextButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="CMP-fn-bBx"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSE-ki-6tn">
                                         <rect key="frame" x="80" y="52" width="142" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="figure.fencing" catalog="system" title="  Attack"/>
+                                        <connections>
+                                            <action selector="attackButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="3O8-UN-zXX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-Kj-14w">
                                         <rect key="frame" x="230" y="52" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="arrow.up.heart.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="healButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ill-Xb-QvR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
