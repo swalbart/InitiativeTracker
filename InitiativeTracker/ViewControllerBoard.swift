@@ -37,7 +37,7 @@ class ViewControllerBoard: UIViewController{
     // MARK: Navigationbar
     @IBAction func sortEntityListButton(_ sender: Any) {
         sortEntitys()
-        //TODO: auch die tableview akutalisieren
+        tableView.reloadData()
     }
     
     // send entity data to ViewControllerEntity
@@ -75,6 +75,12 @@ class ViewControllerBoard: UIViewController{
         currentName.text = entity.name
     }
     
+    func resetDisplayValues() {
+        currentInitiative.text = "-"
+        currentHealth.text = "-"
+        currentName.text = "waiting for entities"
+    }
+    
     // MARK: Sorting
     // sorting all entites (most initiative top)
     func sortEntitys() {
@@ -82,13 +88,12 @@ class ViewControllerBoard: UIViewController{
             $0.initiative > $1.initiative
         }
         entityData.save()
+        //tableView.reloadData()
         if entityData.groupA.count > 0 {
             currentPosition = 0
             setShowboxEntity(pos: currentPosition)
         } else {
-            currentInitiative.text = "-"
-            currentHealth.text = "-"
-            currentName.text = "waiting for entities"
+            resetDisplayValues()
         }
     }
     
@@ -139,11 +144,19 @@ class ViewControllerBoard: UIViewController{
     
     // MARK: Player button actions
     @IBAction func previousButton(_ sender: Any) {
-        previousEntity()
+        if !entityData.groupA.isEmpty {
+            previousEntity()
+        } else {
+            resetDisplayValues()
+        }
     }
     
     @IBAction func nextButton(_ sender: Any) {
-        nextEntity()
+        if !entityData.groupA.isEmpty {
+            nextEntity()
+        } else {
+            resetDisplayValues()
+        }
     }
     
     @IBAction func attackButton(_ sender: Any) {
@@ -222,7 +235,7 @@ extension ViewControllerBoard: UITableViewDataSource{
             entityData.groupA.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        setShowboxEntity(pos: 0)
+        resetDisplayValues()
         entityData.save()
     }
     
