@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21171F329D97CA2002BFF73 /* EntityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21171F229D97CA2002BFF73 /* EntityData.swift */; };
 		D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B1A0229CDC4FD00CF7D04 /* Entity.swift */; };
 		D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */; };
 		D29F2B1529CB5C3200C2BEF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1429CB5C3200C2BEF5 /* SceneDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D21171F229D97CA2002BFF73 /* EntityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityData.swift; sourceTree = "<group>"; };
 		D24B1A0229CDC4FD00CF7D04 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		D29F2B0F29CB5C3200C2BEF5 /* InitiativeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InitiativeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */,
 				D29F2B1B29CB5C3400C2BEF5 /* Assets.xcassets */,
 				D29F2B1D29CB5C3400C2BEF5 /* LaunchScreen.storyboard */,
+				D21171F229D97CA2002BFF73 /* EntityData.swift */,
 			);
 			path = InitiativeTracker;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */,
+				D21171F329D97CA2002BFF73 /* EntityData.swift in Sources */,
 				D2CABB4B29D31CE700743373 /* ViewControllerEntity.swift in Sources */,
 				D29F2B1729CB5C3200C2BEF5 /* ViewController.swift in Sources */,
 				D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */,

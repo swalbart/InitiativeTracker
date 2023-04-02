@@ -9,12 +9,16 @@ import UIKit
 
 class ViewControllerBoard: UIViewController{
     
+    // enables use of shared EntityData
+    let entityData = EntityData.shared
+    
+    /*
     var entities = [
         Entity(name: "BBEG", health: 100, initiative: 18, isFriend: false, isAlive: true),
         Entity(name: "Hero", health: 35, initiative: 16, isFriend: true, isAlive: true),
         Entity(name: "NPC", health: 28, initiative: 5, isFriend: true, isAlive: true),
         Entity(name: "Al", health: 0, initiative: 8, isFriend: false, isAlive: false),
-    ]
+    ]*/
 
     
     @IBOutlet weak var currentInitiative: UILabel!
@@ -42,13 +46,13 @@ class ViewControllerBoard: UIViewController{
         tableView.isEditing = !tableView.isEditing
     }
     
-    // send entitydata to ViewControllerEntity
+    // send entity data to ViewControllerEntity
     @IBSegueAction func toViewControllerEntity(_ coder: NSCoder) -> ViewControllerEntity? {
         let vc = ViewControllerEntity(coder: coder)
         
         // cell tapped to edit
         if let indexpath = tableView.indexPathForSelectedRow{
-            let entity = entities[indexpath.row]
+            let entity = entityData.groupA[indexpath.row]
             vc?.entity = entity
         }
         // create new entity button tapped
@@ -72,8 +76,8 @@ extension ViewControllerBoard: UITableViewDelegate{
         // style: .normal = gray color
         let action = UIContextualAction(style: .normal, title: "Toggle death"){ action, view, complete in
             // replace entity by a new entity with toggeled 'isAlive'-value
-            let entity = self.entities[indexPath.row].isAliveToggled()
-            self.entities[indexPath.row] = entity
+            let entity = self.entityData.groupA[indexPath.row].isAliveToggled()
+            self.entityData.groupA[indexPath.row] = entity
             
             //update 'isAlive'-value to cell
             let cell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
@@ -83,6 +87,7 @@ extension ViewControllerBoard: UITableViewDelegate{
             complete(true)
             print("toggeled 'isAlive'-value of entity")
         }
+        entityData.save()
         return UISwipeActionsConfiguration(actions: [action])
     }
     
@@ -104,7 +109,7 @@ extension ViewControllerBoard: UITableViewDataSource{
     
     // amount of cells in each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entities.count
+        return entityData.groupA.count
     }
     
     // apply entity values to display in cell
@@ -112,7 +117,7 @@ extension ViewControllerBoard: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         cell.delegate = self
         // selection of the next entity
-        let entity = entities[indexPath.row]
+        let entity = entityData.groupA[indexPath.row]
         // setting entityvalues to cell
         cell.set(name: entity.name, health: entity.health, initiative: entity.initiative, isAlive: entity.isAlive)
         return cell
@@ -121,7 +126,7 @@ extension ViewControllerBoard: UITableViewDataSource{
     // delete entity in entities-array and cell in tableview
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            entities.remove(at: indexPath.row)
+            entityData.groupA.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -129,9 +134,10 @@ extension ViewControllerBoard: UITableViewDataSource{
     // reodering cells
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // remove cell from current spot
-        let entity = entities.remove(at: sourceIndexPath.row)
+        let entity = entityData.groupA.remove(at: sourceIndexPath.row)
         // insert cell in new spot
-        entities.insert(entity, at: destinationIndexPath.row)
+        entityData.groupA.insert(entity, at: destinationIndexPath.row)
+        entityData.save()
     }
 }
 
@@ -144,9 +150,10 @@ extension ViewControllerBoard: CustomTableViewCellDelegate{
         }
         // it is not possible to mutate 'entity' because it is a constand
         // instead a new entity gets created to replace the old
-        let entity = entities[indexPath.row]
+        let entity = entityData.groupA[indexPath.row]
         let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
-        entities[indexPath.row] = newEntity
+        entityData.groupA[indexPath.row] = newEntity
+        entityData.save()
     }
 }
 
@@ -156,13 +163,15 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
     func viewControllerEntity(_ vc: ViewControllerEntity, didSaveEntity entity: Entity) {
         if let indexPath = tableView.indexPathForSelectedRow{
             // edited entity
-            entities[indexPath.row] = entity
+            entityData.groupA[indexPath.row] = entity
+            entityData.save()
             tableView.reloadRows(at: [indexPath], with: .none)
         }
         else{
             // created entity
-            entities.append(entity)
-            tableView.insertRows(at: [IndexPath(row: entities.count-1, section: 0)], with: .automatic)
+            entityData.groupA.append(entity)
+            entityData.save()
+            tableView.insertRows(at: [IndexPath(row: entityData.groupA.count-1, section: 0)], with: .automatic)
         }
         // dismisses the poped up view (not in use: view is fullscreen)
         // print("to done")
