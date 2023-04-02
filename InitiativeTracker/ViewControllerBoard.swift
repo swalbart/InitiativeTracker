@@ -25,12 +25,10 @@ class ViewControllerBoard: UIViewController{
     @IBOutlet weak var currentName: UILabel!
     @IBOutlet weak var currentHealth: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var keepUpdated = true
     override func viewDidLoad(){
         super.viewDidLoad()
-        if keepUpdated {
-            //TODO: get values from entity with highest ini
-        }
+        entityData.load()
+        sortEntitys()
     }
     
     // move to storyboard "Main"
@@ -63,6 +61,52 @@ class ViewControllerBoard: UIViewController{
         return vc
     }
     
+    // sorting all entites (most initiative top)
+    func sortEntitys() {
+        entityData.groupA.sort {
+            $0.initiative > $1.initiative
+        }
+        entityData.save()
+        if entityData.groupA.count > 0 {
+            setShowboxEntity(pos: 0)
+        } else {
+            currentInitiative.text = "-"
+            currentHealth.text = "-"
+            currentName.text = "waiting for entities"
+        }
+    }
+    
+    /* Ersetzt von setShowboxEntity
+    // place the entity with the highest initiative in show box below table
+    func setHighestInitiativeEntity() {
+        // converting Integers to stings
+        if let firstInitiative = entityData.groupA.first?.initiative{
+            currentInitiative.text = String(firstInitiative)
+        } else {
+            currentInitiative.text = "Err"
+        }
+        if let firstHealth = entityData.groupA.first?.health{
+            currentHealth.text = String(firstHealth)
+        } else {
+            currentHealth.text = "Err"
+        }
+        currentName.text = entityData.groupA.first?.name
+    }*/
+    
+    // place entity at pos n in show box below table
+    func setShowboxEntity(pos: Int) {
+        guard pos >= 0 && pos < entityData.groupA.count else{
+            return // index out of range
+        }
+        
+        let entity = entityData.groupA[pos]
+        currentInitiative.text = String(entity.initiative)
+        currentHealth.text = String(entity.health)
+        currentName.text = entity.name
+    }
+    
+    
+    
 }
 
 
@@ -86,8 +130,8 @@ extension ViewControllerBoard: UITableViewDelegate{
             // reset swipe animation
             complete(true)
             print("toggeled 'isAlive'-value of entity")
+            self.entityData.save()
         }
-        entityData.save()
         return UISwipeActionsConfiguration(actions: [action])
     }
     
@@ -129,6 +173,8 @@ extension ViewControllerBoard: UITableViewDataSource{
             entityData.groupA.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        setShowboxEntity(pos: 0)
+        entityData.save()
     }
     
     // reodering cells
@@ -138,6 +184,8 @@ extension ViewControllerBoard: UITableViewDataSource{
         // insert cell in new spot
         entityData.groupA.insert(entity, at: destinationIndexPath.row)
         entityData.save()
+        // show first element in showbox (no sort) to keep top entity shown
+        setShowboxEntity(pos: 0)
     }
 }
 
@@ -173,6 +221,7 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
             entityData.save()
             tableView.insertRows(at: [IndexPath(row: entityData.groupA.count-1, section: 0)], with: .automatic)
         }
+        sortEntitys()
         // dismisses the poped up view (not in use: view is fullscreen)
         // print("to done")
         // dismiss(animated: true, completion: nil)
