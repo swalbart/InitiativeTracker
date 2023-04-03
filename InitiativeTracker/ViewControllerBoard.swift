@@ -14,6 +14,8 @@ class ViewControllerBoard: UIViewController{
     
     // global variable to track diyplayed entity
     var currentPosition = 0
+    var isAttack = false
+    var isHeal = false
     
     @IBOutlet weak var currentInitiative: UILabel!
     @IBOutlet weak var currentName: UILabel!
@@ -160,11 +162,54 @@ class ViewControllerBoard: UIViewController{
     }
     
     @IBAction func attackButton(_ sender: Any) {
-        
+        isAttack = !isAttack
+        isHeal = false
     }
     
     @IBAction func healButton(_ sender: Any) {
+        isHeal = !isHeal
+        isAttack = false
+    }
+    
+    // MARK: Alerts
+    // show damageAlert
+    func showDamageAlert(for entity: Entity) {
+        let alertController = UIAlertController(title: "Enter damage amount", message: nil, preferredStyle: .alert)
         
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
+            guard let text = alertController.textFields?.first?.text, let damage = Int(text) else { return }
+            
+            // Hier wird der Schaden am Entity angewendet
+            self.applyDamage(to: entity, with: damage)
+        }
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: Attack
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Hier wird das ausgewählte Entity gefunden und das Pop-up-Fenster geöffnet
+        // only do if it is an attack
+        if isAttack {
+            let entity = entityData.groupA[indexPath.row]
+            showDamageAlert(for: entity)
+        }
+    }
+
+    func applyDamage(to entity: Entity, with damage: Int) {
+        let updatedEntity = Entity(name: entity.name, health: entity.health - damage, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
+        
+        entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
+        tableView.reloadData()
+        entityData.save()
     }
     
 }
