@@ -68,6 +68,8 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
+    
+    
     // MARK: Save changes in Entity
     // save edited/changed name in entity
     @IBAction func save(_ sender: Any) {
@@ -91,7 +93,9 @@ class ViewControllerEntity: UIViewController{
         transition.subtype = CATransitionSubtype.fromLeft
     }
     
-    // MARK: User options
+    
+    
+    // MARK: Entity options
     // switch for dead/alive
     @IBAction func isAliveToggle(_ sender: UISwitch) {
         if sender.isOn{

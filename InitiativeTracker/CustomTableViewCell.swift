@@ -22,7 +22,7 @@ class CustomTableViewCell: UITableViewCell{
     
     weak var delegate: CustomTableViewCellDelegate?
     
-    // MARK: Setter for cell
+    // MARK: Setter
     // setter for cell
     // used in ViewControllerBoard: Delegate
     func set(name: String, health: Int, initiative: Int, isAlive: Bool){
@@ -38,6 +38,8 @@ class CustomTableViewCell: UITableViewCell{
         self.isAlive = isAlive
         isDead(isDead: !isAlive)
     }
+    
+    
     
     // MARK: Mark as dead
     // cross out text if dead

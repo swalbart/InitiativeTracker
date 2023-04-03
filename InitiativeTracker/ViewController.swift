@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         entityData.load()
     }
     
+    
+    
+    // MARK: Storyboard connections
     // move to storyboard 'Board'
     @IBAction func buttonToBoard(_ sender: UIButton){
         let storyboard = UIStoryboard(name: "Board", bundle: nil)

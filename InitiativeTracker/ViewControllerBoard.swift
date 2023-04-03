@@ -27,7 +27,9 @@ class ViewControllerBoard: UIViewController{
         sortEntitys()
     }
     
-    // MARK: Storyboard connection
+    
+    
+    // MARK: Storyboard connections
     // move to storyboard "Main"
     @IBAction func buttonToMain(_ sender: UIButton){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -36,13 +38,10 @@ class ViewControllerBoard: UIViewController{
         windowScene.windows.first?.rootViewController = vc
     }
     
-    // MARK: Navigationbar
-    @IBAction func sortEntityListButton(_ sender: Any) {
-        sortEntitys()
-        tableView.reloadData()
-    }
     
-    // send entity data to ViewControllerEntity
+    
+    // MARK: vcEntity connection
+    // move to and send entity data to ViewControllerEntity
     @IBSegueAction func toViewControllerEntity(_ coder: NSCoder) -> ViewControllerEntity? {
         let vc = ViewControllerEntity(coder: coder)
         
@@ -59,10 +58,20 @@ class ViewControllerBoard: UIViewController{
         return vc
     }
     
+    
+    
+    // MARK: Navigationbar
+    @IBAction func sortEntityListButton(_ sender: Any) {
+        sortEntitys()
+        tableView.reloadData()
+    }
+    
     // toggle editabilty
     @IBAction func startEditing(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
     }
+    
+    
     
     // MARK: Display: current entity
     // place entity at pos n in show box below table
@@ -83,6 +92,8 @@ class ViewControllerBoard: UIViewController{
         currentName.text = "waiting for entities"
     }
     
+    
+    
     // MARK: Sorting
     // sorting all entites (most initiative top)
     func sortEntitys() {
@@ -98,6 +109,8 @@ class ViewControllerBoard: UIViewController{
             resetDisplayValues()
         }
     }
+    
+    
     
     // MARK: Traversing indexes
     func previousEntity(){
@@ -144,6 +157,8 @@ class ViewControllerBoard: UIViewController{
         }
     }
     
+    
+    
     // MARK: Player button actions
     @IBAction func previousButton(_ sender: Any) {
         if !entityData.groupA.isEmpty {
@@ -171,6 +186,8 @@ class ViewControllerBoard: UIViewController{
         isAttack = false
     }
     
+    
+    
     // MARK: Alerts
     // show damageAlert
     func showDamageAlert(for entity: Entity) {
@@ -194,6 +211,8 @@ class ViewControllerBoard: UIViewController{
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    
     // MARK: Attack
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Hier wird das ausgewählte Entity gefunden und das Pop-up-Fenster geöffnet
@@ -205,7 +224,13 @@ class ViewControllerBoard: UIViewController{
     }
 
     func applyDamage(to entity: Entity, with damage: Int) {
-        let updatedEntity = Entity(name: entity.name, health: entity.health - damage, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)
+        var newHealth = entity.health - damage
+        var isStilAlive = true
+        if newHealth <= 0 {
+            newHealth = 0
+            isStilAlive = false
+        }
+        let updatedEntity = Entity(name: entity.name, health: newHealth, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: isStilAlive)
         
         entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
         tableView.reloadData()
@@ -213,6 +238,8 @@ class ViewControllerBoard: UIViewController{
     }
     
 }
+
+
 
 // MARK: Delegate
 // Delegate
@@ -248,6 +275,8 @@ extension ViewControllerBoard: UITableViewDelegate{
         return .delete
     }
 }
+
+
 
 // MARK: DataSource
 //DataSource
@@ -296,6 +325,8 @@ extension ViewControllerBoard: UITableViewDataSource{
     }
 }
 
+
+
 // MARK: Saving changes
 // save created or edited entity
 extension ViewControllerBoard: ViewControllerEntityDelegate{
@@ -317,6 +348,8 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
         // dismiss(animated: true, completion: nil)
     }
 }
+
+
 
 // MARK: Storing data persistent
 // keep data persistent in array
