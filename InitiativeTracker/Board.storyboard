@@ -73,7 +73,6 @@
                                             <outlet property="labelHealth" destination="FMG-ha-PZJ" id="F7N-09-Sex"/>
                                             <outlet property="labelInitiative" destination="BBL-2u-f8v" id="C8D-AE-ubH"/>
                                             <outlet property="labelName" destination="qlW-ns-mAY" id="eFh-rC-hLM"/>
-                                            <segue destination="V6B-Qb-p2J" kind="show" destinationCreationSelector="toViewControllerEntity:" id="5du-ob-PwA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -253,7 +252,7 @@
         <!--View Controller Entity-->
         <scene sceneID="Kqd-gG-EBj">
             <objects>
-                <viewController id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerEntity" id="V6B-Qb-p2J" customClass="ViewControllerEntity" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hqu-VM-ycn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -460,9 +459,6 @@
             <point key="canvasLocation" x="1489" y="-29"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="RY5-dj-bay"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="arrow.up.heart.fill" catalog="system" width="128" height="107"/>

@@ -44,19 +44,34 @@ class ViewControllerBoard: UIViewController{
     // move to and send entity data to ViewControllerEntity
     @IBSegueAction func toViewControllerEntity(_ coder: NSCoder) -> ViewControllerEntity? {
         let vc = ViewControllerEntity(coder: coder)
-        
-        // cell tapped to edit
-        if let indexpath = tableView.indexPathForSelectedRow{
-            let entity = entityData.groupA[indexpath.row]
-            vc?.entity = entity
-        }
         // create new entity button tapped
-        else{
-            vc?.entity = Entity(name: "New Entity", health: 0, initiative: 0, isFriend: true, isAlive: true)
-        }
+        vc?.entity = Entity(name: "New Entity", health: 0, initiative: 0, isFriend: true, isAlive: true)
         vc?.delegate = self
         return vc
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Hier wird das ausgewählte Entity gefunden und das Pop-up-Fenster geöffnet
+        // only do if it is an attack
+        if isAttack {
+            let entity = entityData.groupA[indexPath.row]
+            showDamageAlert(for: entity)
+        }
+        if isHeal {
+            let entity = entityData.groupA[indexPath.row]
+            showHealAlert(for: entity)
+        }
+        else {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerEntity") as! ViewControllerEntity
+            if let indexpath = tableView.indexPathForSelectedRow{
+                let entity = entityData.groupA[indexpath.row]
+                vc.entity = entity
+                vc.delegate = self
+            }
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     
     
     
@@ -188,41 +203,7 @@ class ViewControllerBoard: UIViewController{
     
     
     
-    // MARK: Alerts
-    // show damageAlert
-    func showDamageAlert(for entity: Entity) {
-        let alertController = UIAlertController(title: "Enter damage amount", message: nil, preferredStyle: .alert)
-        
-        alertController.addTextField { textField in
-            textField.keyboardType = .numberPad
-        }
-        
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { _ in
-            guard let text = alertController.textFields?.first?.text, let damage = Int(text) else { return }
-            
-            // Hier wird der Schaden am Entity angewendet
-            self.applyDamage(to: entity, with: damage)
-        }
-        alertController.addAction(confirmAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    
-    // MARK: Attack
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Hier wird das ausgewählte Entity gefunden und das Pop-up-Fenster geöffnet
-        // only do if it is an attack
-        if isAttack {
-            let entity = entityData.groupA[indexPath.row]
-            showDamageAlert(for: entity)
-        }
-    }
-
+    // MARK: Attack entity
     func applyDamage(to entity: Entity, with damage: Int) {
         var newHealth = entity.health - damage
         var isStilAlive = true
@@ -232,9 +213,73 @@ class ViewControllerBoard: UIViewController{
         }
         let updatedEntity = Entity(name: entity.name, health: newHealth, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: isStilAlive)
         
+        // save data
         entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
         tableView.reloadData()
         entityData.save()
+        // un-select attack
+        isAttack = false
+    }
+
+    // MARK: Heal entity
+    func applyHeal(to entity: Entity, with heal: Int) {
+        let newHealth = entity.health + heal
+        let isStilAlive = true
+        let updatedEntity = Entity(name: entity.name, health: newHealth, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: isStilAlive)
+        
+        // save data
+        entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
+        tableView.reloadData()
+        entityData.save()
+        // un-select heal
+        isHeal = false
+    }
+    
+    
+    
+    // MARK: Alerts
+    // show damageAlert
+    func showDamageAlert(for entity: Entity) {
+        let alertController = UIAlertController(title: "Schaden des Angriffs:", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        
+        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
+            guard let text = alertController.textFields?.first?.text, let damage = Int(text) else { return }
+            
+            // Hier wird der Schaden am Entity angewendet
+            self.applyDamage(to: entity, with: damage)
+        }
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // show healAlert
+    func showHealAlert(for entity: Entity) {
+        let alertController = UIAlertController(title: "Höhe der Heilung:", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
+        }
+        
+        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
+            guard let text = alertController.textFields?.first?.text, let heal = Int(text) else { return }
+            
+            // Hier wird die Heilung am Entity angewendet
+            self.applyHeal(to: entity, with: heal)
+        }
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
 }
