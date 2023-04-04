@@ -239,9 +239,13 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="attackButton" destination="hSE-ki-6tn" id="Xlm-fv-fgp"/>
                         <outlet property="currentHealth" destination="3o9-j7-7Mb" id="p21-Ss-TDq"/>
                         <outlet property="currentInitiative" destination="2fU-AC-wAl" id="5Ea-C5-1eF"/>
                         <outlet property="currentName" destination="To3-T3-AaV" id="aXh-d0-P5N"/>
+                        <outlet property="healButton" destination="9Yf-Kj-14w" id="Znd-1r-gzp"/>
+                        <outlet property="nextButton" destination="yCC-AJ-cij" id="P6A-Q2-3Wn"/>
+                        <outlet property="previousButton" destination="UEN-HU-aF5" id="9MB-hc-eIW"/>
                         <outlet property="tableView" destination="QlE-H6-39W" id="BrU-gU-0XU"/>
                     </connections>
                 </viewController>

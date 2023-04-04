@@ -17,6 +17,10 @@ class ViewControllerBoard: UIViewController{
     var isAttack = false
     var isHeal = false
     
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var attackButton: UIButton!
+    @IBOutlet weak var healButton: UIButton!
     @IBOutlet weak var currentInitiative: UILabel!
     @IBOutlet weak var currentName: UILabel!
     @IBOutlet weak var currentHealth: UILabel!
@@ -56,10 +60,12 @@ class ViewControllerBoard: UIViewController{
         if isAttack {
             let entity = entityData.groupA[indexPath.row]
             showDamageAlert(for: entity)
+            attackButton.tintColor = UIColor.tintColor
         }
         if isHeal {
             let entity = entityData.groupA[indexPath.row]
             showHealAlert(for: entity)
+            healButton.tintColor = UIColor.tintColor
         }
         else {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerEntity") as! ViewControllerEntity
@@ -194,11 +200,23 @@ class ViewControllerBoard: UIViewController{
     @IBAction func attackButton(_ sender: Any) {
         isAttack = !isAttack
         isHeal = false
+        if isAttack {
+            attackButton.tintColor = UIColor.systemRed
+            healButton.tintColor = UIColor.tintColor
+        } else {
+            attackButton.tintColor = UIColor.tintColor
+        }
     }
     
     @IBAction func healButton(_ sender: Any) {
         isHeal = !isHeal
         isAttack = false
+        if isHeal {
+            healButton.tintColor = UIColor.systemGreen
+            attackButton.tintColor = UIColor.tintColor
+        } else {
+            healButton.tintColor = UIColor.tintColor
+        }
     }
     
     
