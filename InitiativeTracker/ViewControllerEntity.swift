@@ -13,6 +13,12 @@ protocol ViewControllerEntityDelegate: AnyObject{
 
 class ViewControllerEntity: UIViewController{
     
+    var entity: Entity?
+    var isEntityAlive: Bool?
+    var isEntityFriend: Bool?
+    
+    weak var delegate: ViewControllerEntityDelegate?
+    
     @IBOutlet weak var deadText: UITextField!
     @IBOutlet weak var aliveText: UITextField!
     @IBOutlet weak var enemyText: UITextField!
@@ -30,14 +36,10 @@ class ViewControllerEntity: UIViewController{
     @IBOutlet weak var healthSubtractButton: UIButton!
     @IBOutlet weak var healthAddButton: UIButton!
     @IBOutlet weak var textfield: UITextField!
-    var entity: Entity?
-    var isEntityAlive: Bool?
-    var isEntityFriend: Bool?
-    
-    weak var delegate: ViewControllerEntityDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // turn off user interaction (informative text labels)
         deadText.isUserInteractionEnabled = false
         aliveText.isUserInteractionEnabled = false
         enemyText.isUserInteractionEnabled = false
@@ -46,7 +48,8 @@ class ViewControllerEntity: UIViewController{
         healthText.isUserInteractionEnabled = false
         titleText.isUserInteractionEnabled = false
         notesText.isUserInteractionEnabled = false
-        // get values from entity
+        
+        // get all values from entity
         if let initiative = entity?.initiative{
             initiativeNumber.text = String(initiative)
         } else {
@@ -60,6 +63,8 @@ class ViewControllerEntity: UIViewController{
         textfield.text = entity?.name
         isEntityAlive = entity?.isAlive
         isEntityFriend = entity?.isFriend
+        
+        // set switch values (for correct visual)
         if !isEntityAlive!{
             isAliveSwitch.setOn(false, animated: false)
         }
@@ -73,19 +78,17 @@ class ViewControllerEntity: UIViewController{
     // MARK: Save changes in Entity
     // save edited/changed name in entity
     @IBAction func save(_ sender: Any) {
-        print("saving entity changes") // optional output
+        print("saving entity changes")
         // TODO: Nur Namen ändern oder Andere Werte mit gettern holen
         guard let healthStr = healthNumber.text, let initiativeStr = initiativeNumber.text else{
-            //TODO: handle the case where healtNumber.text or initiativeNumber.text is nil
             return
         }
         guard let healthInt = Int(healthStr), let initiativeInt = Int(initiativeStr) else {
-            //TODO: Exceptionhandling
             return
         }
         let entity = Entity(name: textfield.text!, health: healthInt, initiative: initiativeInt, isFriend: isEntityFriend!, isAlive: isEntityAlive!)
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
-        
+                
         // configure the transition
         let transition = CATransition()
         transition.duration = 0.3
@@ -96,7 +99,7 @@ class ViewControllerEntity: UIViewController{
     
     
     // MARK: Entity options
-    // switch for dead/alive
+    // switch for dead/alive (isAlive)
     @IBAction func isAliveToggle(_ sender: UISwitch) {
         if sender.isOn{
             isEntityAlive = true
@@ -105,7 +108,7 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
-    // switch for enemy/friend
+    // switch for enemy/friend ( isFriend)
     @IBAction func isFriendToggle(_ sender: UISwitch) {
         if sender.isOn{
             isEntityFriend = true

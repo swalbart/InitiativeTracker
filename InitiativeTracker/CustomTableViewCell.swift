@@ -13,18 +13,17 @@ protocol CustomTableViewCellDelegate: AnyObject{
 
 class CustomTableViewCell: UITableViewCell{
     
+    var isAlive: Bool!
+    
+    weak var delegate: CustomTableViewCellDelegate?
+    
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelInitiative: UILabel!
     @IBOutlet weak var labelHealth: UILabel!
     @IBOutlet weak var buttonEdit: UIButton!
     
-    var isAlive: Bool!
-    
-    weak var delegate: CustomTableViewCellDelegate?
-    
     // MARK: Setter
     // setter for cell
-    // used in ViewControllerBoard: Delegate
     func set(name: String, health: Int, initiative: Int, isAlive: Bool){
         labelName.text = name
         labelInitiative.text = String(initiative)
@@ -33,7 +32,6 @@ class CustomTableViewCell: UITableViewCell{
     }
     
     // setter for isAlive
-    // used in ViewControllerBoard: DataSource
     func set(isAlive: Bool){
         self.isAlive = isAlive
         isDead(isDead: !isAlive)
@@ -49,7 +47,7 @@ class CustomTableViewCell: UITableViewCell{
         if isDead {
             attributedString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length-1))
         }
-        // if no longer dead (revive/etc) remove crossed out
+        // if no longer dead remove crossed out
         else {
             attributedString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attributedString.length-1))
         }

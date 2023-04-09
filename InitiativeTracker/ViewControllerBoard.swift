@@ -54,19 +54,24 @@ class ViewControllerBoard: UIViewController{
         return vc
     }
     
+    
+    
+    // MARK: select Cell
+    // tap cell action
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Hier wird das ausgewählte Entity gefunden und das Pop-up-Fenster geöffnet
-        // only do if it is an attack
+        // attack action: attack pop-up
         if isAttack {
             let entity = entityData.groupA[indexPath.row]
             showDamageAlert(for: entity)
             attackButton.tintColor = UIColor.tintColor
         }
+        // heal action: heal pop-up
         if isHeal {
             let entity = entityData.groupA[indexPath.row]
             showHealAlert(for: entity)
             healButton.tintColor = UIColor.tintColor
         }
+        // edit action: move to vcEntity
         else {
             let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerEntity") as! ViewControllerEntity
             if let indexpath = tableView.indexPathForSelectedRow{
@@ -80,13 +85,7 @@ class ViewControllerBoard: UIViewController{
     
     
     
-    
-    // MARK: Navigationbar
-    @IBAction func sortEntityListButton(_ sender: Any) {
-        sortEntitys()
-        tableView.reloadData()
-    }
-    
+    // MARK: Editable
     // toggle editabilty
     @IBAction func startEditing(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
@@ -94,7 +93,30 @@ class ViewControllerBoard: UIViewController{
     
     
     
-    // MARK: Display: current entity
+    // MARK: Sorting
+    // sortbutton in navigationbar
+    @IBAction func sortEntityListButton(_ sender: Any) {
+        sortEntitys()
+        tableView.reloadData()
+    }
+    
+    // sorting all entites (most initiative top)
+    func sortEntitys() {
+        entityData.groupA.sort {
+            $0.initiative > $1.initiative
+        }
+        entityData.save()
+        if entityData.groupA.count > 0 {
+            currentPosition = 0
+            setShowboxEntity(pos: currentPosition)
+        } else {
+            resetDisplayValues()
+        }
+    }
+    
+    
+    
+    // MARK: Displaybox: Entity
     // place entity at pos n in show box below table
     func setShowboxEntity(pos: Int) {
         guard pos >= currentPosition && pos < entityData.groupA.count else{
@@ -115,25 +137,48 @@ class ViewControllerBoard: UIViewController{
     
     
     
-    // MARK: Sorting
-    // sorting all entites (most initiative top)
-    func sortEntitys() {
-        entityData.groupA.sort {
-            $0.initiative > $1.initiative
-        }
-        entityData.save()
-        //tableView.reloadData()
-        if entityData.groupA.count > 0 {
-            currentPosition = 0
-            setShowboxEntity(pos: currentPosition)
+    // MARK: Displaybox: Buttons
+    @IBAction func previousButton(_ sender: Any) {
+        if !entityData.groupA.isEmpty {
+            previousEntity()
         } else {
             resetDisplayValues()
         }
     }
     
+    @IBAction func nextButton(_ sender: Any) {
+        if !entityData.groupA.isEmpty {
+            nextEntity()
+        } else {
+            resetDisplayValues()
+        }
+    }
+    
+    @IBAction func attackButton(_ sender: Any) {
+        isAttack = !isAttack
+        isHeal = false
+        if isAttack {
+            attackButton.tintColor = UIColor.systemRed
+            healButton.tintColor = UIColor.tintColor
+        } else {
+            attackButton.tintColor = UIColor.tintColor
+        }
+    }
+    
+    @IBAction func healButton(_ sender: Any) {
+        isHeal = !isHeal
+        isAttack = false
+        if isHeal {
+            healButton.tintColor = UIColor.systemGreen
+            attackButton.tintColor = UIColor.tintColor
+        } else {
+            healButton.tintColor = UIColor.tintColor
+        }
+    }
     
     
-    // MARK: Traversing indexes
+    
+    // MARK: Traversing EntityArray
     func previousEntity(){
         var count = entityData.groupA.count
         // search for next alive member
@@ -180,48 +225,52 @@ class ViewControllerBoard: UIViewController{
     
     
     
-    // MARK: Player button actions
-    @IBAction func previousButton(_ sender: Any) {
-        if !entityData.groupA.isEmpty {
-            previousEntity()
-        } else {
-            resetDisplayValues()
+    // MARK: Health alerts
+    // show damageAlert
+    func showDamageAlert(for entity: Entity) {
+        let alertController = UIAlertController(title: "Schaden des Angriffs:", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
         }
-    }
-    
-    @IBAction func nextButton(_ sender: Any) {
-        if !entityData.groupA.isEmpty {
-            nextEntity()
-        } else {
-            resetDisplayValues()
+        
+        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
+            guard let text = alertController.textFields?.first?.text, let damage = Int(text) else { return }
+            self.applyDamage(to: entity, with: damage)
         }
-    }
-    
-    @IBAction func attackButton(_ sender: Any) {
-        isAttack = !isAttack
-        isHeal = false
-        if isAttack {
-            attackButton.tintColor = UIColor.systemRed
-            healButton.tintColor = UIColor.tintColor
-        } else {
-            attackButton.tintColor = UIColor.tintColor
-        }
-    }
-    
-    @IBAction func healButton(_ sender: Any) {
-        isHeal = !isHeal
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         isAttack = false
-        if isHeal {
-            healButton.tintColor = UIColor.systemGreen
-            attackButton.tintColor = UIColor.tintColor
-        } else {
-            healButton.tintColor = UIColor.tintColor
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // show healAlert
+    func showHealAlert(for entity: Entity) {
+        let alertController = UIAlertController(title: "Höhe der Heilung:", message: nil, preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.keyboardType = .numberPad
         }
+        
+        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
+            guard let text = alertController.textFields?.first?.text, let heal = Int(text) else { return }
+            self.applyHeal(to: entity, with: heal)
+        }
+        alertController.addAction(confirmAction)
+        
+        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        isHeal = false
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     
     
-    // MARK: Attack entity
+    // MARK: Health changes
     func applyDamage(to entity: Entity, with damage: Int) {
         var newHealth = entity.health - damage
         var isStilAlive = true
@@ -233,13 +282,14 @@ class ViewControllerBoard: UIViewController{
         
         // save data
         entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
-        tableView.reloadData()
         entityData.save()
+        // reload table and displaybox
+        tableView.reloadData()
+        setShowboxEntity(pos: currentPosition)
         // un-select attack
         isAttack = false
     }
 
-    // MARK: Heal entity
     func applyHeal(to entity: Entity, with heal: Int) {
         let newHealth = entity.health + heal
         let isStilAlive = true
@@ -247,77 +297,30 @@ class ViewControllerBoard: UIViewController{
         
         // save data
         entityData.groupA[tableView.indexPathForSelectedRow!.row] = updatedEntity
-        tableView.reloadData()
         entityData.save()
+        // reload table and displaybox
+        tableView.reloadData()
+        setShowboxEntity(pos: currentPosition)
         // un-select heal
         isHeal = false
     }
-    
-    
-    
-    // MARK: Alerts
-    // show damageAlert
-    func showDamageAlert(for entity: Entity) {
-        let alertController = UIAlertController(title: "Schaden des Angriffs:", message: nil, preferredStyle: .alert)
-        
-        alertController.addTextField { textField in
-            textField.keyboardType = .numberPad
-        }
-        
-        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
-            guard let text = alertController.textFields?.first?.text, let damage = Int(text) else { return }
-            
-            // Hier wird der Schaden am Entity angewendet
-            self.applyDamage(to: entity, with: damage)
-        }
-        alertController.addAction(confirmAction)
-        
-        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    // show healAlert
-    func showHealAlert(for entity: Entity) {
-        let alertController = UIAlertController(title: "Höhe der Heilung:", message: nil, preferredStyle: .alert)
-        
-        alertController.addTextField { textField in
-            textField.keyboardType = .numberPad
-        }
-        
-        let confirmAction = UIAlertAction(title: "Bestätigen", style: .default) { _ in
-            guard let text = alertController.textFields?.first?.text, let heal = Int(text) else { return }
-            
-            // Hier wird die Heilung am Entity angewendet
-            self.applyHeal(to: entity, with: heal)
-        }
-        alertController.addAction(confirmAction)
-        
-        let cancelAction = UIAlertAction(title: "Abbrechen", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
 }
 
 
 
-// MARK: Delegate
+// MARK: Tableview: Delegate
 // Delegate
 extension ViewControllerBoard: UITableViewDelegate{
-    // swipe right behaviour of cells
+    // swipe left-to-right behaviour of cells
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        // swipe message and actions
-        // style: .normal = gray color
+        // swipe message and actions // style: .normal = gray color
         let action = UIContextualAction(style: .normal, title: "Toggle death"){ action, view, complete in
-            // replace entity by a new entity with toggeled 'isAlive'-value
-            let entity = self.entityData.groupA[indexPath.row].isAliveToggled()
+            // replace entity by a new entity with inverted 'isAlive' value
+            let entity = self.entityData.groupA[indexPath.row].isAliveToggle()
             self.entityData.groupA[indexPath.row] = entity
             
-            //update 'isAlive'-value to cell
+            // update 'isAlive'-value to cell
             let cell = tableView.cellForRow(at: indexPath) as! CustomTableViewCell
             cell.set(isAlive: entity.isAlive)
             
@@ -325,6 +328,7 @@ extension ViewControllerBoard: UITableViewDelegate{
             complete(true)
             print("toggeled 'isAlive'-value of entity")
             let entityIsAlive = self.entityData.groupA[self.currentPosition].isAlive
+            // check if entitie 'died' for displaybox entity
             if !entityIsAlive {
                 self.nextEntity()
             }
@@ -333,6 +337,7 @@ extension ViewControllerBoard: UITableViewDelegate{
         return UISwipeActionsConfiguration(actions: [action])
     }
     
+    // delete entity
     // swipe left behaviour of cells
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
@@ -341,7 +346,7 @@ extension ViewControllerBoard: UITableViewDelegate{
 
 
 
-// MARK: DataSource
+// MARK: Tableview: DataSource
 //DataSource
 extension ViewControllerBoard: UITableViewDataSource{
     
@@ -407,6 +412,7 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
             tableView.insertRows(at: [IndexPath(row: entityData.groupA.count-1, section: 0)], with: .automatic)
         }
         sortEntitys()
+        tableView.reloadData()
         // dismisses the poped up view (not in use: view is fullscreen)
         // dismiss(animated: true, completion: nil)
     }
@@ -415,13 +421,13 @@ extension ViewControllerBoard: ViewControllerEntityDelegate{
 
 
 // MARK: Storing data persistent
-// keep data persistent in array
+// keep data persistent
 extension ViewControllerBoard: CustomTableViewCellDelegate{
     func customTableViewCell(_ cell: CustomTableViewCell, didChangeIsAlive isAlive: Bool) {
         guard let indexPath = tableView.indexPath(for: cell) else{
             return
         }
-        // it is not possible to mutate 'entity' because it is a constand
+        // it is not possible to mutate 'entity' because it is a constant
         // instead a new entity gets created to replace the old
         let entity = entityData.groupA[indexPath.row]
         let newEntity = Entity(name: entity.name, health: entity.health, initiative: entity.initiative, isFriend: entity.isFriend, isAlive: entity.isAlive)

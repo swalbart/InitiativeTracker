@@ -12,8 +12,10 @@ class EntityData: Codable {
 
     var groupA: [Entity] = []
     
+    
+    
     // MARK: Save data
-    // serializes EntityData with JSONencoder and saved
+    // serializes EntityData with JSONencoder and saves it
     func save() {
         do {
             let encoder = JSONEncoder()
@@ -23,6 +25,8 @@ class EntityData: Codable {
             print("Error saving entity data: (error.localizedDescription)")
         }
     }
+    
+    
 
     // MARK: Load data
     // loads EntityData and deserializes it with JSONdecoder
@@ -32,11 +36,12 @@ class EntityData: Codable {
             let decoder = JSONDecoder()
             let loadedData = try decoder.decode(EntityData.self, from: data)
             self.groupA = loadedData.groupA
-            //self.groupB = loadedData.groupB
         } catch {
             print("Error loading entity data: (error.localizedDescription)")
         }
     }
+    
+    
 
     // MARK: Path for data
     private func fileURL() -> URL {

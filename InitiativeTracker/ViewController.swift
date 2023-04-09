@@ -25,7 +25,5 @@ class ViewController: UIViewController {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {return}
         windowScene.windows.first?.rootViewController = vc
     }
-    
-    @IBOutlet var testButton: UIButton!
 }
 

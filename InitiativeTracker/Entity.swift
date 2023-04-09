@@ -14,7 +14,6 @@ struct Entity: Codable {
     let isFriend: Bool
     let isAlive: Bool
 
-    // c-tor
     init(name: String, health: Int, initiative: Int, isFriend: Bool, isAlive: Bool){
         self.name = name
         self.health = health
@@ -24,7 +23,7 @@ struct Entity: Codable {
     }
     
     // Dead/Alive toggler [create copy of entity with inverted 'isAlive']
-    func isAliveToggled() -> Entity {
+    func isAliveToggle() -> Entity {
         return Entity(name: name, health: health, initiative: initiative, isFriend: isFriend, isAlive: !isAlive)
     }
     
