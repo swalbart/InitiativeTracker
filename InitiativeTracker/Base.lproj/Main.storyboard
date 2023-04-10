@@ -120,7 +120,7 @@
         <!--Options-->
         <scene sceneID="p7L-qs-4g6">
             <objects>
-                <viewController id="ERW-JL-5bW" userLabel="Options" sceneMemberID="viewController">
+                <viewController id="ERW-JL-5bW" userLabel="Options" customClass="ViewControllerOptions" customModule="InitiativeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wlN-Zw-OZa"/>
                         <viewControllerLayoutGuide type="bottom" id="1QY-zd-13b"/>
@@ -128,13 +128,42 @@
                     <view key="view" contentMode="scaleToFill" id="2u7-I9-mhJ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Automatisches Traversieren" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N8J-du-afH">
+                                <rect key="frame" x="16" y="136" width="303" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="b2N-HH-cPl">
+                                <rect key="frame" x="16" y="178" width="303" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Das einschalten von automaischem Traversieren ermöglicht es nach einer Angriffs- oder Heil-aktion automatisch zum nächsten Charakter der liste zu springen. Somit entfällt das manuelle drücken des "vorwärts"-Knopfes.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-Ak-h2W">
+                                <rect key="frame" x="327" y="138" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="autoTraverseToggle:" destination="ERW-JL-5bW" eventType="valueChanged" id="wRp-gT-dcl"/>
+                                </connections>
+                            </switch>
+                        </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="iRs-OD-RsG"/>
+                    <connections>
+                        <outlet property="autoTraverseDescription" destination="b2N-HH-cPl" id="MA2-OS-FzI"/>
+                        <outlet property="autoTraverseLabel" destination="N8J-du-afH" id="o1Q-sX-eef"/>
+                        <outlet property="autoTraverseSwitch" destination="LwQ-Ak-h2W" id="G1r-wR-cPK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUa-Qq-iso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438" y="-26"/>
+            <point key="canvasLocation" x="1436.9230769230769" y="-26.303317535545023"/>
         </scene>
     </scenes>
     <resources>

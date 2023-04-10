@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D21171F329D97CA2002BFF73 /* EntityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21171F229D97CA2002BFF73 /* EntityData.swift */; };
 		D249358F29E3682100818FB4 /* d20_300.png in Resources */ = {isa = PBXBuildFile; fileRef = D249358E29E3682100818FB4 /* d20_300.png */; };
+		D249359129E372F500818FB4 /* ViewControllerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249359029E372F500818FB4 /* ViewControllerOptions.swift */; };
 		D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B1A0229CDC4FD00CF7D04 /* Entity.swift */; };
 		D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */; };
 		D29F2B1529CB5C3200C2BEF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1429CB5C3200C2BEF5 /* SceneDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		D21171F229D97CA2002BFF73 /* EntityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityData.swift; sourceTree = "<group>"; };
 		D249358E29E3682100818FB4 /* d20_300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d20_300.png; sourceTree = "<group>"; };
+		D249359029E372F500818FB4 /* ViewControllerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerOptions.swift; sourceTree = "<group>"; };
 		D24B1A0229CDC4FD00CF7D04 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		D29F2B0F29CB5C3200C2BEF5 /* InitiativeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InitiativeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */,
 				D29F2B1429CB5C3200C2BEF5 /* SceneDelegate.swift */,
 				D29F2B1629CB5C3200C2BEF5 /* ViewController.swift */,
+				D249359029E372F500818FB4 /* ViewControllerOptions.swift */,
 				D29F2B1829CB5C3200C2BEF5 /* Main.storyboard */,
 				D29F2B2029CB5C3400C2BEF5 /* Info.plist */,
 				D29F2B4229CB60C300C2BEF5 /* ViewControllerBoard.swift */,
@@ -284,6 +287,7 @@
 				D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */,
 				D21171F329D97CA2002BFF73 /* EntityData.swift in Sources */,
 				D2CABB4B29D31CE700743373 /* ViewControllerEntity.swift in Sources */,
+				D249359129E372F500818FB4 /* ViewControllerOptions.swift in Sources */,
 				D29F2B1729CB5C3200C2BEF5 /* ViewController.swift in Sources */,
 				D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */,
 				D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */,
