@@ -93,12 +93,17 @@ class ViewControllerEntity: UIViewController{
         }
         let entity = Entity(name: textfield.text!, health: healthInt, initiative: initiativeInt, isFriend: isEntityFriend!, isAlive: isEntityAlive!)
         delegate?.viewControllerEntity(self, didSaveEntity: entity)
-                
-        // configure the transition
+        
+        // configure the navigation
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.5
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromLeft
+        
+        // navigate to vcBoard
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
+        navigationController?.popViewController(animated: false)
+         
     }
     
     
