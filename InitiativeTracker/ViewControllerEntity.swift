@@ -48,6 +48,11 @@ class ViewControllerEntity: UIViewController{
         healthText.isUserInteractionEnabled = false
         titleText.isUserInteractionEnabled = false
         notesText.isUserInteractionEnabled = false
+        // set colors for buttons
+        initiativeAddButton.tintColor = UIColor.systemGreen
+        initiativeSubtractButton.tintColor = UIColor.secondaryLabel
+        healthAddButton.tintColor = UIColor.systemGreen
+        healthSubtractButton.tintColor = UIColor.secondaryLabel
         
         // get all values from entity
         if let initiative = entity?.initiative{
@@ -98,7 +103,7 @@ class ViewControllerEntity: UIViewController{
     
     
     
-    // MARK: Entity options
+    // MARK: Switches
     // switch for dead/alive (isAlive)
     @IBAction func isAliveToggle(_ sender: UISwitch) {
         if sender.isOn{
@@ -117,6 +122,9 @@ class ViewControllerEntity: UIViewController{
         }
     }
     
+    
+    
+    //MARK: Buttons
     // button: decrements initiative
     @IBAction func subtractInitiative(_ sender: Any) {
         var initiativeString = initiativeNumber.text!

@@ -17,6 +17,9 @@ class ViewControllerBoard: UIViewController{
     var isAttack = false
     var isHeal = false
     
+    let friendGreen = UIColor(red: 0.392, green: 0.784, blue: 0.392, alpha: 0.5)
+    let friendRed = UIColor(red: 0.784, green: 0.392, blue: 0.392, alpha: 0.5)
+    
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var attackButton: UIButton!
@@ -144,6 +147,12 @@ class ViewControllerBoard: UIViewController{
         } else {
             resetDisplayValues()
         }
+        if isAttack || isHeal {
+            isAttack = false
+            isHeal = false
+            attackButton.tintColor = UIColor.tintColor
+            healButton.tintColor = UIColor.tintColor
+        }
     }
     
     @IBAction func nextButton(_ sender: Any) {
@@ -152,13 +161,19 @@ class ViewControllerBoard: UIViewController{
         } else {
             resetDisplayValues()
         }
+        if isAttack || isHeal {
+            isAttack = false
+            isHeal = false
+            attackButton.tintColor = UIColor.tintColor
+            healButton.tintColor = UIColor.tintColor
+        }
     }
     
     @IBAction func attackButton(_ sender: Any) {
         isAttack = !isAttack
         isHeal = false
         if isAttack {
-            attackButton.tintColor = UIColor.systemRed
+            attackButton.tintColor = UIColor(red: 0.784, green: 0.392, blue: 0.392, alpha: 1)
             healButton.tintColor = UIColor.tintColor
         } else {
             attackButton.tintColor = UIColor.tintColor
@@ -169,7 +184,7 @@ class ViewControllerBoard: UIViewController{
         isHeal = !isHeal
         isAttack = false
         if isHeal {
-            healButton.tintColor = UIColor.systemGreen
+            healButton.tintColor = UIColor(red: 0.392, green: 0.784, blue: 0.392, alpha: 1)
             attackButton.tintColor = UIColor.tintColor
         } else {
             healButton.tintColor = UIColor.tintColor
@@ -368,6 +383,12 @@ extension ViewControllerBoard: UITableViewDataSource{
         let entity = entityData.groupA[indexPath.row]
         // setting entityvalues to cell
         cell.set(name: entity.name, health: entity.health, initiative: entity.initiative, isAlive: entity.isAlive)
+        // setting background color
+        if entity.isFriend {
+            cell.backgroundColor = friendGreen
+        } else {
+            cell.backgroundColor = friendRed
+        }
         return cell
     }
     
