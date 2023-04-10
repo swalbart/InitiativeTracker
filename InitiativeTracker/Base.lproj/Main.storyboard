@@ -24,7 +24,7 @@
                                 <rect key="frame" x="45" y="680" width="300" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="About"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Hilfestellung"/>
                                 <connections>
                                     <segue destination="lPA-es-Gy0" kind="show" id="Xxe-6k-AP0"/>
                                 </connections>
@@ -50,7 +50,7 @@
                                 <rect key="frame" x="45" y="600" width="300" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Options"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Optionen"/>
                                 <connections>
                                     <segue destination="ERW-JL-5bW" kind="show" id="sA9-nN-Ndw"/>
                                 </connections>
@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="570.76923076923072" y="-26.303317535545023"/>
         </scene>
-        <!--About-->
+        <!--Help-->
         <scene sceneID="xYr-BI-lLv">
             <objects>
-                <viewController id="lPA-es-Gy0" userLabel="About" sceneMemberID="viewController">
+                <viewController id="lPA-es-Gy0" userLabel="Help" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vuz-ai-wOK"/>
                         <viewControllerLayoutGuide type="bottom" id="ueS-UL-KcU"/>
@@ -82,13 +82,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hLx-zU-7CV">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hLx-zU-7CV">
                                 <rect key="frame" x="16" y="91" width="358" height="711"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Optionsmenü: Hier können allgemeine Einstellungen der App verändert werden.   Start: Über diese Schaltfläche gelangt man zum Initiative Tracker.   Initiative Tracker: &gt; Zelle bearbeiten: Zelle antippen. &gt; Zelle erstellen: "Plus"-Knopf. &gt; Zellen sortieren: "Liste"-Knopf. &gt; Zellen manuell sortieren: Knopf mit Quadrat und Stift. &gt; Zelle durchstreichen: Zelle nach rechts wischen. &gt; Zelle löschen: Zelle nach links wischen. &gt; Angriff: Angriffsknopf antippen, dann anzugreifende Zelle antippen. &gt; Heilung: Herzknopf antippen, dann zu heilende Zelle antippen.   Editiermenü: &gt; Speichern: Knopf oben rechts</string>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <mutableString key="text">Hilfestellung zum Initiative Tracker:   Zelle bearbeiten: &gt; Zelle antippen.  Zelle erstellen: &gt; "Plus"-Knopf.  Zellen sortieren: &gt; "Liste"-Knopf.  Zellen manuell sortieren: &gt; Knopf mit Quadrat und Stift.  Zelle durchstreichen: &gt; Zelle nach rechts wischen.  Zelle löschen: &gt; Zelle nach links wischen.  Angriff: &gt; Angriffsknopf antippen, dann anzugreifende Zelle antippen.  Heilung: &gt; Herzknopf antippen, dann zu heilende Zelle antippen.</mutableString>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -145,7 +145,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-Ak-h2W">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-Ak-h2W">
                                 <rect key="frame" x="327" y="138" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -168,7 +168,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="d20_300.png" width="299" height="300"/>
+        <image name="d20_300.png" width="72" height="72"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

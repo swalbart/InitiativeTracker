@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D21171F329D97CA2002BFF73 /* EntityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21171F229D97CA2002BFF73 /* EntityData.swift */; };
-		D249358F29E3682100818FB4 /* d20_300.png in Resources */ = {isa = PBXBuildFile; fileRef = D249358E29E3682100818FB4 /* d20_300.png */; };
 		D249359129E372F500818FB4 /* ViewControllerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249359029E372F500818FB4 /* ViewControllerOptions.swift */; };
 		D24B1A0329CDC4FD00CF7D04 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24B1A0229CDC4FD00CF7D04 /* Entity.swift */; };
 		D29F2B1329CB5C3200C2BEF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B1229CB5C3200C2BEF5 /* AppDelegate.swift */; };
@@ -24,6 +23,7 @@
 		D29F2B4729CB6E3E00C2BEF5 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */; };
 		D29F2B4929CCDD0600C2BEF5 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */; };
 		D2CABB4B29D31CE700743373 /* ViewControllerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */; };
+		D2F481F629E4B84400EE2D84 /* d20_300.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F481F529E4B84400EE2D84 /* d20_300.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		D21171F229D97CA2002BFF73 /* EntityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityData.swift; sourceTree = "<group>"; };
-		D249358E29E3682100818FB4 /* d20_300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d20_300.png; sourceTree = "<group>"; };
 		D249359029E372F500818FB4 /* ViewControllerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerOptions.swift; sourceTree = "<group>"; };
 		D24B1A0229CDC4FD00CF7D04 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		D29F2B0F29CB5C3200C2BEF5 /* InitiativeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InitiativeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +64,7 @@
 		D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
 		D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerEntity.swift; sourceTree = "<group>"; };
+		D2F481F529E4B84400EE2D84 /* d20_300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d20_300.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 				D29F2B4829CCDD0600C2BEF5 /* CustomTableViewCell.swift */,
 				D2CABB4A29D31CE700743373 /* ViewControllerEntity.swift */,
 				D29F2B4629CB6E3E00C2BEF5 /* Board.storyboard */,
+				D2F481F529E4B84400EE2D84 /* d20_300.png */,
 				D29F2B1B29CB5C3400C2BEF5 /* Assets.xcassets */,
-				D249358E29E3682100818FB4 /* d20_300.png */,
 				D29F2B1D29CB5C3400C2BEF5 /* LaunchScreen.storyboard */,
 				D21171F229D97CA2002BFF73 /* EntityData.swift */,
 			);
@@ -257,7 +257,7 @@
 			files = (
 				D29F2B1F29CB5C3400C2BEF5 /* LaunchScreen.storyboard in Resources */,
 				D29F2B1C29CB5C3400C2BEF5 /* Assets.xcassets in Resources */,
-				D249358F29E3682100818FB4 /* d20_300.png in Resources */,
+				D2F481F629E4B84400EE2D84 /* d20_300.png in Resources */,
 				D29F2B1A29CB5C3200C2BEF5 /* Main.storyboard in Resources */,
 				D29F2B4729CB6E3E00C2BEF5 /* Board.storyboard in Resources */,
 			);
