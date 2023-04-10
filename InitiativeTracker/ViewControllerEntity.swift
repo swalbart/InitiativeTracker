@@ -47,7 +47,6 @@ class ViewControllerEntity: UIViewController{
         initiativeText.isUserInteractionEnabled = false
         healthText.isUserInteractionEnabled = false
         titleText.isUserInteractionEnabled = false
-        notesText.isUserInteractionEnabled = false
         // set colors for buttons
         initiativeAddButton.tintColor = UIColor.systemGreen
         initiativeSubtractButton.tintColor = UIColor.secondaryLabel

@@ -425,7 +425,6 @@
                         <outlet property="initiativeText" destination="lzQ-p5-hxr" id="CKs-as-O7r"/>
                         <outlet property="isAliveSwitch" destination="GVP-Pr-Yq1" id="gSb-h7-rFJ"/>
                         <outlet property="isFriendSwitch" destination="6Vf-Mt-bMh" id="Bt8-Mk-AZe"/>
-                        <outlet property="notesText" destination="ZY6-LI-Dnc" id="n3R-lt-zsa"/>
                         <outlet property="textfield" destination="ms6-Ec-iEi" id="Hzg-iI-usI"/>
                         <outlet property="titleText" destination="2sX-8V-DVD" id="K8B-qN-1PI"/>
                     </connections>
